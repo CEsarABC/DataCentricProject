@@ -67,14 +67,21 @@ def formfill():
 #     recipe.insert_one(form)
 #     return redirect(url_for('test_aller'))
 
+
+''' working now saving eveything to data base and arrayValues
+of allergens working perfectly, filtering other values from dictionary'''
+
 @app.route('/insert_recipe', methods=['POST'])
 def insert_recipe():
     recipe =  mongo.db.nesting
     arrayValues = []
     if request.method == "POST":
         form_one=request.form.to_dict()
-        # for k, v in form_one.items():
-        #     arrayValues.append(v)
+        print(form_one)
+        allergenList = form_one.get('allergens')
+        for k, v in form_one.items():
+            if k != 'task_name' and k != 'task_description' and  k != 'radio':
+                arrayValues.append(v)
         print(arrayValues)
         tname= request.form['task_name']
         tdescr= request.form['task_description']
