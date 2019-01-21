@@ -78,23 +78,31 @@ def insert_recipe():
     if request.method == "POST":
         form_one=request.form.to_dict()
         print(form_one)
-        allergenList = form_one.get('allergens')
         for k, v in form_one.items():
-            if k != 'task_name' and k != 'task_description' and  k != 'radio':
+            if k not in ('author_name','author_dob','recipe_name','recipe_description','cuisine_name','serves','cooking_time', 'ingredients','method'):
+            #if k != 'task_name' and k != 'task_description' and  k != 'radio':
                 arrayValues.append(v)
-        print(arrayValues)
-        tname= request.form['task_name']
-        tdescr= request.form['task_description']
-        tradio= request.form['radio']
-        # tmilk= request.form['milk1']
-        # tcelery= request.form['celery1']
-        # tmollucs= request.form['mollucs1']
-        # tnuts= request.form['nuts1']
-        # tsulf= request.form['sulfites1']
+        #print(arrayValues)
+        name = request.form['author_name']
+        dob = request.form['author_dob']
+        nrecipe = request.form['recipe_name']
+        description = request.form['recipe_description']
+        cuisine = request.form['cuisine_name']
+        serves = int(request.form['serves'])
+        ctime = int(request.form['cooking_time'])
+        ingredients = request.form['ingredients']
+        method = request.form['method']
+        
         form = {
-            'task_name': tname,
-            'task_description': tdescr,
-            'radio': tradio,
+            'author': name,
+            'dob': dob,
+            'recipe_name': nrecipe,
+            'description': description,
+            'cuisine': cuisine,
+            'serves': serves,
+            'time': ctime,
+            'ingredients': ingredients,
+            'method': method,
             'allergens': arrayValues
                 }
         recipe.insert_one(form)
