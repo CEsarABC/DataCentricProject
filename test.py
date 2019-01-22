@@ -57,23 +57,51 @@ mongo = PyMongo(app)
 #     allergens=mongo.db.allergensColl.find(),allergensList=mongo.db.allergensColl.find({'allergens':'milk'},{'allergens':1, '_id':0}))
 
 ''' inserts one dictionary when the form in addtask.html is submited '''
-@app.route('/')
+#@app.route('/')
 def formfill():
     return render_template('testform.html')
-# @app.route('/insert_recipe', methods=['POST','GET'])
-# def insert_recipe():
-#     recipe =  mongo.db.nesting
-#     form = request.form.to_dict()
-#     recipe.insert_one(form)
-#     return redirect(url_for('test_aller'))
+
+
+
+''' testing author with form, we send author name and dob, the system creates
+a new search with those two values and gets the document'''
+#@app.route('/')
+def myrecipes():
+    return render_template('myrecipes.html')
+    
+@app.route('/testauthor')
+def test_author():
+    return render_template('testsAuthor.html')
+    
+@app.route('/')
+@app.route('/authors', methods=['POST','GET'])
+def check_author():
+    recipe =  mongo.db.nesting
+    authorCollection =  mongo.db.authors
+    keysDict = []
+    if request.method == "POST":
+        authorform=request.form.to_dict()
+        print(authorform)
+        # items = authorform.items()
+        # print(items)
+        ggg = authorform.get('author')
+        kkk = authorform.get('dob')
+        searchfile = authorCollection.find_one({'author':ggg, 'dob':kkk})
+        print(searchfile)
+        print(authorform.get('author'))
+        return redirect(url_for('test_author'))
+        
+    return render_template('myrecipes.html', searchfile=searchfile)
 
 
 ''' working now saving eveything to data base and arrayValues
-of allergens working perfectly, filtering other values from dictionary'''
+    of allergens working perfectly, filtering other values from dictionary '''
+
 
 @app.route('/insert_recipe', methods=['POST'])
 def insert_recipe():
     recipe =  mongo.db.nesting
+    authorCollection =  mongo.db.authors
     arrayValues = []
     if request.method == "POST":
         form_one=request.form.to_dict()
@@ -107,6 +135,13 @@ def insert_recipe():
                 }
         recipe.insert_one(form)
         
+        authorForm = {
+            'author': name,
+            'dob': dob,
+            'recipe_name': [{'name': nrecipe}]
+        }
+        authorCollection.insert_one(authorForm)
+        
         #print(form_one)
     return redirect(url_for('test_aller'))
     
@@ -115,24 +150,6 @@ def test_aller():
     return render_template('allergens.html')
 
 
-# @app.route('/test_form')
-# def test_form():
-#     return render_template("testform.html", 
-#     recipes=mongo.db.recipesColl.find())
-    
-# @app.route('/update_form', methods=["POST"])
-# def update_recipe():
-#     recipes=mongo.db.test_form
-#     recipes.update_one({
-#         'task_name':request.form.get['task_name'],
-#         'category_name':request.form.get['category_name'],
-#         'task_description': request.form.get['task_description'],
-#         'due_date': request.form.get['due_date'],
-#         'is_urgent':request.form.get['is_urgent'],
-#         'boolean':request.form.get['boolean'],
-#         'allergens': [request.form.get['milk'],request.form.get['celery'],request.form.get['nuts'],request.form.get['sulfites']]
-#     }, upsert = True)
-#     return render_template("testform.html")
 
     
 if __name__ == '__main__':
