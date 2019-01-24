@@ -36,3 +36,15 @@
     font-family: 'yellowtail', cusive;
     color: #966F00;
 }
+
+.blackbox {
+    border: solid 1px black;
+    padding: 10px;
+}
+.newimage{
+    height: 300px;
+}
+
+.foods{
+    font-size: 10em;
+}

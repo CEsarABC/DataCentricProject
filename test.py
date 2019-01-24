@@ -80,15 +80,15 @@ def insert_recipe():
             #if k != 'task_name' and k != 'task_description' and  k != 'radio':
                 arrayValues.append(v)
         #print(arrayValues)
-        name = request.form['author_name']
-        dob = request.form['author_dob']
-        nrecipe = request.form['recipe_name']
-        description = request.form['recipe_description']
-        cuisine = request.form['cuisine_name']
-        serves = int(request.form['serves'])
-        ctime = int(request.form['cooking_time'])
-        ingredients = request.form['ingredients']
-        method = request.form['method']
+        name = request.form.get('author_name')
+        dob = request.form.get('author_dob')
+        nrecipe = request.form.get('recipe_name')
+        description = request.form.get('recipe_description')
+        cuisine = request.form.get('cuisine_name')
+        serves = int(request.form.get('serves'))
+        ctime = int(request.form.get('cooking_time'))
+        ingredients = request.form.get('ingredients')
+        method = request.form.get('method')
         
         #print(description + name)
         
@@ -105,14 +105,7 @@ def insert_recipe():
             'allergens': arrayValues
                 }
         recipe.insert_one(form)
-        # autor collection not needed
-        authorForm = {
-            'author': name,
-            'dob': dob,
-            'recipe_name': [{'name': nrecipe}]
-        }
-        authorCollection.insert_one(authorForm)
-        
+       
         #print(form)
     return redirect(url_for('test_aller'))
     
