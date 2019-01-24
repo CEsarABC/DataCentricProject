@@ -57,45 +57,14 @@ mongo = PyMongo(app)
 #     allergens=mongo.db.allergensColl.find(),allergensList=mongo.db.allergensColl.find({'allergens':'milk'},{'allergens':1, '_id':0}))
 
 ''' inserts one dictionary when the form in addtask.html is submited '''
-#@app.route('/')
+@app.route('/')
 def formfill():
     return render_template('testform.html')
 
 
-
-''' testing author with form, we send author name and dob, the system creates
-a new search with those two values and gets the document'''
-#@app.route('/')
-def myrecipes():
-    return render_template('myrecipes.html')
-    
-@app.route('/testauthor')
-def test_author():
-    return render_template('testsAuthor.html')
-    
-@app.route('/')
-@app.route('/authors', methods=['POST','GET'])
-def check_author():
-    recipe =  mongo.db.nesting
-    authorCollection =  mongo.db.authors
-    keysDict = []
-    if request.method == "POST":
-        authorform=request.form.to_dict()
-        print(authorform)
-        # items = authorform.items()
-        # print(items)
-        ggg = authorform.get('author')
-        kkk = authorform.get('dob')
-        searchfile = authorCollection.find_one({'author':ggg, 'dob':kkk})
-        print(searchfile)
-        print(authorform.get('author'))
-        return redirect(url_for('test_author'))
-        
-    return render_template('myrecipes.html', searchfile=searchfile)
-
-
 ''' working now saving eveything to data base and arrayValues
-    of allergens working perfectly, filtering other values from dictionary '''
+    of allergens working perfectly, filtering other values from dictionary 
+    saving to two collections at the same time '''
 
 
 @app.route('/insert_recipe', methods=['POST'])
@@ -121,6 +90,8 @@ def insert_recipe():
         ingredients = request.form['ingredients']
         method = request.form['method']
         
+        #print(description + name)
+        
         form = {
             'author': name,
             'dob': dob,
@@ -134,7 +105,7 @@ def insert_recipe():
             'allergens': arrayValues
                 }
         recipe.insert_one(form)
-        
+        # autor collection not needed
         authorForm = {
             'author': name,
             'dob': dob,
@@ -142,7 +113,7 @@ def insert_recipe():
         }
         authorCollection.insert_one(authorForm)
         
-        #print(form_one)
+        #print(form)
     return redirect(url_for('test_aller'))
     
 @app.route('/test_aller')
