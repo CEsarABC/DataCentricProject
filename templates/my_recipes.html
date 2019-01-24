@@ -21,19 +21,34 @@
           code in the application should redirect to the same page after validation
           to show results -->
         <div>
-          <button class="form-control btn btn-primary" type="submit">Add info</button>
+          <button class="form-control btn btn-primary" type="submit">Search</button>
         </div>
       </form>
-      <!--bring all dresults from search in my recipes(search by user name and dob)
-      shows list of recipes created by this person and option to edit or delete -->
-      <div class="row">
-          <div>
-              {% if item in document %}
-              <p>this is the recipe name</p>
-              <button>delete</button>
-              <button>edit</button>
-              {% endif %}
+      <div class='row'>
+        {% if searchfile %}
+        <h2>Welcome {{authorName}}</h2>
+        {% endif %}
+      </div>
+      
+      <div>
+        <div class='row'>
+          {% for item in searchfile %}
+          <div class='col-lg-3 col-md-3 col-sm-4' >
+            <div class="card" style="width: 18rem;">
+              <div class="card-body">
+                <span style="font-size: 48px; color: Dodgerblue;">
+                  <i class="fas fa-utensils"></i>
+                </span>
+                <h5 class="card-title">{{item.recipe_name}}</h5>
+                <p class="card-text">{{item.description}}</p>
+                <a href="#" class="btn btn-primary">Edit</a>
+                <a href="#" class="btn btn-primary">Delete</a>
+              </div>
           </div>
+          </div>
+          
+          {% endfor %}
+        </div>
       </div>
 </div>
 
