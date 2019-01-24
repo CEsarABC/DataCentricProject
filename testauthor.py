@@ -22,7 +22,7 @@ interects with the form '''
 def myrecipes():
     return render_template('myrecipes.html')
 
-@app.route('/')
+#@app.route('/')
 @app.route('/testauthor', methods=['POST','GET'])
 def test_author():
     authorCollection =  mongo.db.authors
@@ -37,17 +37,16 @@ from the form '''
 def check_author():
     recipe =  mongo.db.nesting
     authorCollection =  mongo.db.authors
-    if request.method == "POST":
-        authorform=request.form.to_dict()## why to dictionary just bring the values?????
-        print(authorform)
-        items = authorform.items()
-        print(items)
-        ggg = authorform.get('author')
-        kkk = authorform.get('dob')
-        searchfile = authorCollection.find_one({'author':ggg, 'dob':kkk})
-        print(searchfile.get('recipe_name'))
-        print(authorform.get('author'))
-    return redirect(url_for('test_aller'))
+    authorform=request.form.to_dict()## why to dictionary just bring the values?????
+    print(authorform)
+    items = authorform.items()
+    print(items)
+    ggg = authorform.get('author')
+    kkk = authorform.get('dob')
+    searchfile = authorCollection.find_one({'author':ggg, 'dob':kkk})
+    print(searchfile.get('recipe_name'))
+    print(authorform.get('author'))
+    return render_template('testsAuthor.html', searchfile=searchfile)
     
 @app.route('/test_aller')
 def test_aller():
