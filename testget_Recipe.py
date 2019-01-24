@@ -48,6 +48,12 @@ def check_author():
 def test_aller():
     return render_template('allergens.html')
     
+@app.route('/edit_recipe/<item_id>')
+def edit_recipe(item_id):
+    the_recipe =  mongo.db.nesting.find_one({"_id": ObjectId(item_id)})
+    #all_categories =  mongo.db.categories.find()
+    return render_template('edit_recipe.html', recipe=the_recipe)
+    
     
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
