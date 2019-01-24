@@ -1,0 +1,41 @@
+{% extends 'base.html' %} 
+
+{% block content %}
+
+<!--            HEADER                   -->
+<div class="container">
+      <form class='row' action="{{ url_for('check_author') }}" method="POST">
+          <div class='col-lg-10 col-md-10 col-sm-12'>
+            <div class='form-row'>
+              <div class="col">
+                  <input class="form-control" type="text"  name="author" id="author_name" required/>
+                  <label for="author_name">Author First Name</label>
+              </div>
+              <div class="col">
+                  <input class="form-control" type="text" name="dob" id="author_dob" required/>
+                  <label for="author">Author D.O.B</label>
+              </div>
+            </div>
+          </div>
+          <!--this submit should update this page with the results
+          code in the application should redirect to the same page after validation
+          to show results -->
+        <div>
+          <button class="form-control btn btn-primary" type="submit">Add info</button>
+        </div>
+      </form>
+      <!--bring all dresults from search in my recipes(search by user name and dob)
+      shows list of recipes created by this person and option to edit or delete -->
+      <div class="row">
+          <div>
+              {% if item in document %}
+              <p>this is the recipe name</p>
+              <button>delete</button>
+              <button>edit</button>
+              {% endif %}
+          </div>
+      </div>
+</div>
+
+{% endblock %}
+
