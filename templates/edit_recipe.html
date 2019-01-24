@@ -6,51 +6,50 @@
 <!--            HEADER                   -->
 <div class="container">
     
-      <form class='row' action="{{ url_for('insert_recipe') }}" method="POST">
-          <!-- changing url for depending of application {{ url_for('insert_recipe') }}-->
+      <form class='row' action="{{url_for('update_recipe', recipe_id=recipe._id) }}" method="POST">
           <div class='col-lg-10 col-md-9 col-sm-12'>
             <div class='form-row'>
               <div class="col">
-                  <input class="form-control" type="text"  name="author_name" id="author_name" required/>
+                  <input class="form-control" type="text"  name="author_name" id="author_name" value='{{recipe.author}}' required/>
                   <label for="author_name">Author First Name</label>
               </div>
               <div class="col">
-                  <input class="form-control" type="text" name="author_dob" id="author_dob" required/>
+                  <input class="form-control" type="text" name="author_dob" id="author_dob" value='{{recipe.dob}}' required/>
                   <label for="author_dob">Author D.O.B</label>
               </div>
             </div>
             <div class='form-row'>
               <div class="col">
-                  <input class="form-control" type="text"  name="recipe_name" id="recipe_name" required/>
+                  <input class="form-control" type="text"  name="recipe_name" id="recipe_name" value='{{recipe.recipe_name}}' required/>
                   <label for="recipe_name">Recipe Name</label>
               </div>
               <div class="col">
-                  <input class="form-control" type="text" name="recipe_description" id="recipe_description"/>
+                  <input class="form-control" type="text" name="recipe_description" id="recipe_description" value='{{recipe.description}}'/>
                   <label for="recipe_description">Description</label>
               </div>
             </div>
             <div class='form-row'>
               <div class="col">
-                  <input class="form-control col-lg-4" type="text"  name="cuisine_name" id="cuisine"/>
+                  <input class="form-control col-lg-4" type="text"  name="cuisine_name" id="cuisine" value='{{recipe.cuisine}}'/>
                   <label for="recipe_name">Cuisine</label>
               </div>
               <div class="col">
-                  <input class="form-control col-lg-4" type="number" name="serves" id="serves"/>
+                  <input class="form-control col-lg-4" type="number" name="serves" id="serves" value='{{recipe.serves}}'/>
                   <label for="serves">Serves</label>
               </div>
               <div class="col">
-                  <input class="form-control col-lg-4" type="number"  name="cooking_time" id="cooking_time"/>
+                  <input class="form-control col-lg-4" type="number"  name="cooking_time" id="cooking_time" value='{{recipe.time}}'/>
                   <label for="cooking_time">Cooking Time in Minuntes</label>
               </div>
             </div>
             <div class='form-row'>
-              <div class="form-group col">
+              <div class="col">
                 <label for="ingredients">Ingredients</label>
-                <textarea class="form-control" id="ingredients" name='ingredients' rows="3"></textarea>
+                <textarea class="form-control" id="ingredients" name='ingredients' rows="3" value='{{recipe.ingredients}}'>{{recipe.ingredients}}</textarea>
               </div>
-              <div class="form-group col">
+              <div class="col">
                 <label for="method">Method</label>
-                <textarea class="form-control" id="method" name='method' rows="3"></textarea>
+                <textarea class="form-control" id="method" name='method' rows="3" value='{{recipe.method}}'>{{recipe.method}}</textarea>
               </div>
             </div>
             
@@ -58,23 +57,23 @@
           <div class='col-lg-2 col-md-3 col-sm-12 blackbox' >
             <h3>Allergens</h3>
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" name="crustaceans1" value="crustaceans" id="crustaceans" checked="checked" />
+              <input class="form-check-input" type="checkbox" name="crustaceans1" value="crustaceans" id="crustaceans"/>
               <label class="form-check-label" for="crustaceans">Crustaceans</label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" name="gluten1" value="gluten" id="gluten" checked="checked" />
+              <input class="form-check-input" type="checkbox" name="gluten1" value="gluten" id="gluten"/>
               <label class="form-check-label" for="gluten">Gluten</label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" name="milk1" value="milk" id="milk" checked="checked" />
+              <input class="form-check-input" type="checkbox" name="milk1" value="milk" id="milk"/>
               <label class="form-check-label" for="milk">Milk</label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" name="eggs1" value="eggs" id="eggs" checked="checked" />
+              <input class="form-check-input" type="checkbox" name="eggs1" value="eggs" id="eggs"/>
               <label class="form-check-label" for="eggs">Eggs</label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" name="fish1" value="fish" id="fish" checked="checked" />
+              <input class="form-check-input" type="checkbox" name="fish1" value="fish" id="fish"/>
               <label class="form-check-label" for="fish">Fish</label>
             </div>
             <div class="form-check">

@@ -41,7 +41,7 @@
                 </span>
                 <h5 class="card-title">{{item.recipe_name}}</h5>
                 <p class="card-text">{{item.description}}</p>
-                <a href="#" class="btn btn-primary">Edit</a>
+                <a href="{{url_for('edit_recipe', item_id=item._id)}}" class="btn btn-primary">Edit</a>
                 <a href="#" class="btn btn-primary">Delete</a>
               </div>
           </div>
