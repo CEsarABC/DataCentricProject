@@ -22,11 +22,17 @@ interects with the form '''
 def myrecipes():
     return render_template('my_recipes.html')
 
-@app.route('/')
-@app.route('/testauthor', methods=['POST','GET'])
-def test_author():
+#@app.route('/')
+@app.route('/my_recipes', methods=['POST','GET'])
+def my_recipes():
     nestingCollection =  mongo.db.nesting
     return render_template('my_recipes.html')
+    
+@app.route('/')
+@app.route('/search', methods=['POST','GET'])
+def search():
+    cuisine =  mongo.db.cuisine.find()
+    return render_template('search_recipe.html', cuisine=cuisine)
     
 '''this function takes the imput from a form and replace the 
 values in the query with the vales in the new dictionary created 
@@ -44,6 +50,35 @@ def check_author():
     print(nesting.get('author'))
     return render_template('my_recipes.html', searchfile = nestingCollection.find({'author':author, 'dob':dob}), authorName=author.capitalize())
     
+@app.route('/search_recipe_author', methods=['POST','GET'])
+def search_recipe_author():
+    recipes = mongo.db.nesting
+    cuisine =  mongo.db.cuisine.find()
+    recipe=request.form.to_dict()## why to dictionary just bring the values?????
+    author = recipe.get('author')
+
+    return render_template('search_recipe.html', searchAuthor = recipes.find({'author':author}), cuisine=cuisine)
+    
+@app.route('/search_recipe_allergen', methods=['POST','GET'])
+def search_recipe_allergen():
+    recipes = mongo.db.nesting
+    cuisine =  mongo.db.cuisine.find()
+    recipe=request.form.to_dict()## why to dictionary just bring the values?????
+    allergen = recipe.get('allergen')
+
+    return render_template('search_recipe.html', searchAuthor = recipes.find({'allergens':allergen}), cuisine=cuisine)
+    
+@app.route('/search_recipe_cuisine', methods=['POST','GET'])
+def search_recipe_cuisine():
+    recipes = mongo.db.nesting
+    cuisine =  mongo.db.cuisine.find()
+    recipe=request.form.to_dict()## why to dictionary just bring the values?????
+    cuisine1 = recipe.get('cuisine')
+    print(cuisine1)
+
+    return render_template('search_recipe.html', searchAuthor = recipes.find({'cuisine':cuisine1}), cuisine=cuisine)
+
+
 @app.route('/test_aller')
 def test_aller():
     return render_template('allergens.html')
