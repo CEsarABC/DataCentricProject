@@ -30,8 +30,13 @@
             </div>
             <div class='form-row'>
               <div class="col">
-                  <input class="form-control col-lg-4" type="text"  name="cuisine_name" id="cuisine" value='{{recipe.cuisine}}'/>
-                  <label for="recipe_name">Cuisine</label>
+                  <select class="form-control col-lg-4" name="cuisine_name" id="cuisine">
+                    <option value="" disabled selected>Choose Cuisine</option>
+                    {% for item in cuisine %}
+                    <option value="{{item.cuisine}}">{{item.cuisine}}</option>
+                    {% endfor %}
+                  </select>
+                  <label>Cuisine Type</label>
               </div>
               <div class="col">
                   <input class="form-control col-lg-4" type="number" name="serves" id="serves" value='{{recipe.serves}}'/>
