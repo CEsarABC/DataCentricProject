@@ -24,21 +24,21 @@
           <button class="form-control btn btn-primary" type="submit">Search</button>
         </div>
       </form>
+      
       <div class='row'>
         {% if searchfile %}
         <h2>Welcome {{authorName}}</h2>
         {% endif %}
       </div>
       
+      
       <div>
         <div class='row'>
           {% for item in searchfile %}
-          <div class='col-lg-3 col-md-3 col-sm-4' >
+          <div class='col-lg-4 col-md-4 col-sm-4' >
             <div class="card" style="width: 18rem;">
+              <img class="card-img-top image-fluid" src="{{item.images}}" alt="Card image cap">
               <div class="card-body">
-                <span style="font-size: 48px; color: Dodgerblue;">
-                  <i class="fas fa-utensils"></i>
-                </span>
                 <h5 class="card-title">{{item.recipe_name}}</h5>
                 <p class="card-text">{{item.description}}</p>
                 <a href="{{url_for('edit_recipe', item_id=item._id)}}" class="btn btn-primary">Edit</a>

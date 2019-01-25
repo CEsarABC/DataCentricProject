@@ -1,0 +1,110 @@
+{% extends 'base.html' %} 
+
+{% block content %}
+
+<!--            HEADER                   -->
+<div class="container">
+      <form class='row' action="{{ url_for('search_recipe_author') }}" method="POST">
+          <div class='col-lg-10 col-md-10 col-sm-12'>
+            <div class='form-row'>
+              <div class="col">
+                  <input class="form-control" type="text"  name="author" id="author_name"/>
+                  <label for="author_name">Author First Name</label>
+              </div>
+            </div>
+          </div>
+          <!--this submit should update this page with the results
+          code in the application should redirect to the same page after validation
+          to show results -->
+        <div>
+          <button class="form-control btn btn-primary" type="submit">Search</button>
+        </div>
+      </form>
+      <form class='row' action="{{ url_for('search_recipe_allergen') }}" method="POST">
+          <div class='col-lg-10 col-md-10 col-sm-12'>
+            <div class='form-row'>
+              <div class="col">
+                  <input class="form-control" type="text"  name="allergen" id="allergen"/>
+                  <label for="allergens">Allergen</label>
+              </div>
+            </div>
+          </div>
+        <div>
+          <button class="form-control btn btn-primary" type="submit">Search</button>
+        </div>
+      </form>
+      <form class='row' action="{{ url_for('search_recipe_cuisine') }}" method="POST">
+        <div class="col">
+            <select class="form-control col-lg-4" name="cuisine" id="cuisine">
+            <option value="" disabled selected>Choose Cuisine</option>
+            {% for item in cuisine %}
+            <option value="{{item.cuisine}}">{{item.cuisine}}</option>
+            {% endfor %}
+            </select>
+            <label>Cuisine Type</label>
+        </div>
+        <div>
+          <button class="form-control btn btn-primary" type="submit">Search</button>
+        </div>
+      </form>
+      
+      
+      <div>
+        <div class='row'>
+            {% if searchAuthor%}
+              {% for item in searchAuthor %}
+              <div class='col-lg-4 col-md-4 col-sm-4' >
+                <div class="card" style="width: 18rem;">
+                  <img class="card-img-top image-fluid" src="{{item.images}}" alt="Card image cap">
+                  <div class="card-body">
+                    <h5 class="card-title">{{item.recipe_name}}</h5>
+                    <p class="card-text">{{item.description}}</p>
+                    <a href="{{url_for('edit_recipe', item_id=item._id)}}" class="btn btn-primary">Edit</a>
+                    <a href="#" class="btn btn-primary">Delete</a>
+                  </div>
+              </div>
+              </div>
+              {% endfor %}
+            {% endif %}
+        </div>
+        <div class='row'>
+            {% if searchAllergen%}
+          {% for item in searchAllergen %}
+          <div class='col-lg-4 col-md-4 col-sm-4' >
+            <div class="card" style="width: 18rem;">
+              <img class="card-img-top image-fluid" src="{{item.images}}" alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title">{{item.recipe_name}}</h5>
+                <p class="card-text">{{item.description}}</p>
+                <a href="{{url_for('edit_recipe', item_id=item._id)}}" class="btn btn-primary">Edit</a>
+                <a href="#" class="btn btn-primary">Delete</a>
+              </div>
+          </div>
+          </div>
+          
+          {% endfor %}
+          {% endif %}
+        </div>
+        <div class='row'>
+            {% if searchCuisine%}
+          {% for item in searchCuisine %}
+          <div class='col-lg-4 col-md-4 col-sm-4' >
+            <div class="card" style="width: 18rem;">
+              <img class="card-img-top image-fluid" src="{{item.images}}" alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title">{{item.recipe_name}}</h5>
+                <p class="card-text">{{item.description}}</p>
+                <a href="{{url_for('edit_recipe', item_id=item._id)}}" class="btn btn-primary">Edit</a>
+                <a href="#" class="btn btn-primary">Delete</a>
+              </div>
+          </div>
+          </div>
+          
+          {% endfor %}
+          {% endif %}
+        </div>
+      </div>
+</div>
+
+{% endblock %}
+
