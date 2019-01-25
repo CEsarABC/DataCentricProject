@@ -104,6 +104,7 @@ def insert_recipe():
             'ingredients': ingredients,
             'method': method,
             'views': 0,
+            "images": "/static/images/dishes0.jpg",
             'allergens': arrayValues
                 }
         recipe.insert_one(form)
