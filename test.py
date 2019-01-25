@@ -59,7 +59,8 @@ mongo = PyMongo(app)
 ''' inserts one dictionary when the form in addtask.html is submited '''
 @app.route('/')
 def formfill():
-    return render_template('testform.html')
+    cuisine= mongo.db.cuisine.find()
+    return render_template('testform.html', cuisine=cuisine)
 
 
 ''' working now saving eveything to data base and arrayValues
@@ -102,6 +103,7 @@ def insert_recipe():
             'time': ctime,
             'ingredients': ingredients,
             'method': method,
+            'views': 0,
             'allergens': arrayValues
                 }
         recipe.insert_one(form)
