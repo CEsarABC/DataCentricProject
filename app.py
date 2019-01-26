@@ -1,9 +1,10 @@
 import os
-from flask import Flask, render_template, redirect, request, url_for
+from flask import Flask, render_template, redirect, request, url_for,session
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'mykey'
 
 app.config["MONGO_DBNAME"] = 'recipes'
 app.config["MONGO_URI"] = 'mongodb://recipes:Mongo3@ds021026.mlab.com:21026/recipes'
@@ -71,7 +72,7 @@ def insert_recipe():
         recipe.insert_one(form)
        
         #print(form)
-    return redirect(url_for('test_aller'))
+    return redirect(url_for('intro'))
     
 '''         search application                 '''
 
@@ -94,14 +95,15 @@ def my_recipes():
 
 @app.route('/authors', methods=['POST','GET'])
 def check_author():
-    recipe =  mongo.db.nesting
     nestingCollection =  mongo.db.nesting
     nesting=request.form.to_dict()## why to dictionary just bring the values?????
     items = nesting.items()
     author = nesting.get('author')
     dob = nesting.get('dob')
-    print(nesting.get('author'))
-    return render_template('my_recipes.html', searchfile = nestingCollection.find({'author':author, 'dob':dob}), authorName=author.capitalize())
+    session['author'] = request.form['author']
+    session['dob']= request.form['dob']
+    searchfile = nestingCollection.find({'author':author, 'dob':dob})
+    return render_template('my_recipes.html', searchfile = searchfile, authorName=author.capitalize(),author=author,dob=dob)
     
 @app.route('/search_recipe_author', methods=['POST','GET'])
 def search_recipe_author():
@@ -177,13 +179,19 @@ def update_recipe(recipe_id):
         'method': method,
         'allergens': arrayValues
     })
-    return redirect(url_for('test_aller'))
+    return redirect(url_for('my_recipes'))
     
 
-@app.route('/test_aller')
-def test_aller():
-    return render_template('allergens.html')
-
+@app.route('/delete_recipe/<item_id>')
+def delete_recipe(item_id):
+    mongo.db.nesting.remove({'_id': ObjectId(item_id)})
+    return redirect(url_for('my_recipes_session'))
+    
+@app.route('/my_recipes_old', methods=['POST','GET'])
+def my_recipes_session():
+    nestingCollection =  mongo.db.nesting
+    searchfileold = nestingCollection.find({'author':session.get('author'), 'dob':session.get('dob')})
+    return render_template('my_recipes_old.html', searchfileold=searchfileold)
 
 
     
