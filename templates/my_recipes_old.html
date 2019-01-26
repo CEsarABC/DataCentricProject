@@ -1,0 +1,38 @@
+{% extends 'base.html' %} 
+
+{% block content %}
+
+<!--            HEADER                   -->
+<div class='container'>
+  <div class='row'>
+        
+        <h2>Welcome {{session['author'].capitalize()}}</h2>
+       
+      </div>
+    
+      <div>
+        {% if searchfileold %}
+        <div class='row'>
+          {% for item in searchfileold %}
+          <div class='col-lg-4 col-md-4 col-sm-4' >
+            <div class="card" style="width: 18rem;">
+              <img class="card-img-top image-fluid" src="{{item.images}}" alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title">{{item.recipe_name}}</h5>
+                <p class="card-text">{{item.description}}</p>
+                <a href="{{url_for('edit_recipe', item_id=item._id)}}" class="btn btn-primary">Edit</a>
+                <a href="{{url_for('delete_recipe', item_id=item._id)}}" class="btn btn-primary">Delete</a>
+              </div>
+          </div>
+          </div>
+          
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+</div>
+      
+      
+
+{% endblock %}
+
