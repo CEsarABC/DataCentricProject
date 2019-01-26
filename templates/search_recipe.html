@@ -3,9 +3,14 @@
 {% block content %}
 
 <!--            HEADER                   -->
+
 <div class="container">
+    <div class="jumbotron">
+      <h1 class="display-4">Hello, world!</h1>
+      <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+    </div>
       <form class='row' action="{{ url_for('search_recipe_author') }}" method="POST">
-          <div class='col-lg-10 col-md-10 col-sm-12'>
+          <div class='col-lg-6 col-md-6 col-sm-6'>
             <div class='form-row'>
               <div class="col">
                   <input class="form-control" type="text"  name="author" id="author_name"/>
@@ -21,11 +26,11 @@
         </div>
       </form>
       <form class='row' action="{{ url_for('search_recipe_allergen') }}" method="POST">
-          <div class='col-lg-10 col-md-10 col-sm-12'>
+          <div class='col-lg-6 col-md-6 col-sm-6'>
             <div class='form-row'>
               <div class="col">
                   <input class="form-control" type="text"  name="allergen" id="allergen"/>
-                  <label for="allergens">Allergen</label>
+                  <label for="allergens">filter your allergen</label>
               </div>
             </div>
           </div>
@@ -34,8 +39,8 @@
         </div>
       </form>
       <form class='row' action="{{ url_for('search_recipe_cuisine') }}" method="POST">
-        <div class="col">
-            <select class="form-control col-lg-4" name="cuisine" id="cuisine">
+        <div class="col-lg-6 col-md-6 col-sm-6">
+            <select class="form-control" name="cuisine" id="cuisine">
             <option value="" disabled selected>Choose Cuisine</option>
             {% for item in cuisine %}
             <option value="{{item.cuisine}}">{{item.cuisine}}</option>
@@ -55,12 +60,11 @@
               {% for item in searchAuthor %}
               <div class='col-lg-4 col-md-4 col-sm-4' >
                 <div class="card" style="width: 18rem;">
-                  <img class="card-img-top image-fluid" src="{{item.images}}" alt="Card image cap">
+                  <img class="card-img-top image-fluid" src="{{item.images_small}}" alt="Card image cap">
                   <div class="card-body">
                     <h5 class="card-title">{{item.recipe_name}}</h5>
                     <p class="card-text">{{item.description}}</p>
-                    <a href="{{url_for('edit_recipe', item_id=item._id)}}" class="btn btn-primary">Edit</a>
-                    <a href="#" class="btn btn-primary">Delete</a>
+                    <a href="{{ url_for('show_recipe', item_id=item._id) }}" class="btn btn-primary">View Recipe</a>
                   </div>
               </div>
               </div>
@@ -72,12 +76,11 @@
           {% for item in searchAllergen %}
           <div class='col-lg-4 col-md-4 col-sm-4' >
             <div class="card" style="width: 18rem;">
-              <img class="card-img-top image-fluid" src="{{item.images}}" alt="Card image cap">
+              <img class="card-img-top image-fluid" src="{{item.images_small}}" alt="Card image cap">
               <div class="card-body">
                 <h5 class="card-title">{{item.recipe_name}}</h5>
                 <p class="card-text">{{item.description}}</p>
-                <a href="{{url_for('edit_recipe', item_id=item._id)}}" class="btn btn-primary">Edit</a>
-                <a href="#" class="btn btn-primary">Delete</a>
+                <a href="{{ url_for('show_recipe', item_id=item._id) }}" class="btn btn-primary">View Recipe</a>
               </div>
           </div>
           </div>
@@ -90,12 +93,11 @@
           {% for item in searchCuisine %}
           <div class='col-lg-4 col-md-4 col-sm-4' >
             <div class="card" style="width: 18rem;">
-              <img class="card-img-top image-fluid" src="{{item.images}}" alt="Card image cap">
+              <img class="card-img-top image-fluid" src="{{item.images_small}}" alt="Card image cap">
               <div class="card-body">
                 <h5 class="card-title">{{item.recipe_name}}</h5>
                 <p class="card-text">{{item.description}}</p>
-                <a href="{{url_for('edit_recipe', item_id=item._id)}}" class="btn btn-primary">Edit</a>
-                <a href="#" class="btn btn-primary">Delete</a>
+                <a href="{{ url_for('show_recipe', item_id=item._id) }}" class="btn btn-primary">View Recipe</a>
               </div>
           </div>
           </div>

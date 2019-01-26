@@ -7,20 +7,29 @@
     <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-12 blackbox">
             <div class="col">
-                <div class="newimage">IMAGE</div>
+                <img class="image-fluid recipe_pic" src="{{ url_for('static',filename='images/dana.jpg') }}"></img>
             </div>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-12 blackbox">
-            <div class="row blackbox"><p>this is TITTLES block</p></div>
-            <div class="row blackbox"><p>this is ALLERGENS</p></div>
+            <div class="row blackbox">
+                <h2>{{recipe.recipe_name}}</h2>
+                </div>
+            <div class="row blackbox">
+                <h2>Allergens</h2>
+                {% for item in recipe.allergens %}
+                <p>{{item}} /</p>
+                {% endfor %}
+                </div>
             <div class="row blackbox"><p>this is GRAPHS</p></div>
             
         </div>
         <div class="col-lg-6 col-md-6 col-sm-12 blackbox">
-            <p>this is INGREDIENTS</p>
+            <h2>Ingredients</h2>
+            <p>{{recipe.ingredients}}</p>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-12 blackbox">
-            <p>this is the METHOD block</p>
+            <h2>Method</h2>
+            <p>{{recipe.method}}</p>
         </div>
     </div>
 </div>
