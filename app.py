@@ -12,9 +12,22 @@ app.config["MONGO_URI"] = 'mongodb://recipes:Mongo3@ds021026.mlab.com:21026/reci
 mongo = PyMongo(app)
 
 
-@app.route('/Welcome')
+@app.route('/')
 def intro():
     return render_template('intro.html')
+    
+@app.route('/contact')
+def contact():
+    return render_template('contact.html')
+    
+    
+'''     show recipe        '''    
+@app.route('/recipe/<item_id>')
+def show_recipe(item_id):
+    the_recipe =  mongo.db.nesting.find_one({"_id": ObjectId(item_id)})
+    cuisine =  mongo.db.cuisine.find()
+    return render_template('recipe_page.html', recipe=the_recipe, cuisine=cuisine)
+    
     
 '''         insert recipe application                '''
 
@@ -66,7 +79,8 @@ def insert_recipe():
             'ingredients': ingredients,
             'method': method,
             'views': 0,
-            "images": "/static/images/dishes0.jpg",
+            "images_small": "/static/images/dishes0.jpg",
+            "images_large": "/static/images/dishesL0.jpg",
             'allergens': arrayValues
                 }
         recipe.insert_one(form)
@@ -77,7 +91,7 @@ def insert_recipe():
 '''         search application                 '''
 
 
-@app.route('/')
+#@app.route('/')
 @app.route('/search', methods=['POST','GET'])
 def search():
     cuisine =  mongo.db.cuisine.find()
@@ -102,7 +116,7 @@ def check_author():
     dob = nesting.get('dob')
     session['author'] = request.form['author']
     session['dob']= request.form['dob']
-    searchfile = nestingCollection.find({'author':author, 'dob':dob})
+    searchfile = nestingCollection.find({'author':author.lower(), 'dob':dob})
     return render_template('my_recipes.html', searchfile = searchfile, authorName=author.capitalize(),author=author,dob=dob)
     
 @app.route('/search_recipe_author', methods=['POST','GET'])
@@ -110,7 +124,7 @@ def search_recipe_author():
     recipes = mongo.db.nesting
     cuisine =  mongo.db.cuisine.find()
     recipe=request.form.to_dict()## why to dictionary just bring the values?????
-    author = recipe.get('author')
+    author = (recipe.get('author')).lower()
 
     return render_template('search_recipe.html', searchAuthor = recipes.find({'author':author}), cuisine=cuisine)
     
@@ -120,8 +134,8 @@ def search_recipe_allergen():
     cuisine =  mongo.db.cuisine.find()
     recipe=request.form.to_dict()## why to dictionary just bring the values?????
     allergen = recipe.get('allergen')
-
-    return render_template('search_recipe.html', searchAuthor = recipes.find({'allergens':allergen}), cuisine=cuisine)
+    
+    return render_template('search_recipe.html', searchAuthor = recipes.find({'allergen':{"$ne" : allergen}}), cuisine=cuisine)
     
 @app.route('/search_recipe_cuisine', methods=['POST','GET'])
 def search_recipe_cuisine():
@@ -179,7 +193,7 @@ def update_recipe(recipe_id):
         'method': method,
         'allergens': arrayValues
     })
-    return redirect(url_for('my_recipes'))
+    return redirect(url_for('my_recipes_session'))
     
 
 @app.route('/delete_recipe/<item_id>')
