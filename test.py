@@ -112,9 +112,7 @@ def insert_recipe():
         #print(form)
     return redirect(url_for('test_aller'))
     
-@app.route('/test_aller')
-def test_aller():
-    return render_template('allergens.html')
+
 
 
 

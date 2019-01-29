@@ -35,7 +35,7 @@ def show_recipe(item_id):
 @app.route('/new_recipe')
 def formfill():
     cuisine= mongo.db.cuisine.find()
-    return render_template('testform.html', cuisine=cuisine)
+    return render_template('new_recipe.html', cuisine=cuisine)
 
 
 ''' working now saving eveything to data base and arrayValues
@@ -94,6 +94,20 @@ def insert_recipe():
 #@app.route('/')
 @app.route('/search', methods=['POST','GET'])
 def search():
+    listAuthor=[]
+    recipe = mongo.db.nesting
+    authors = recipe.find({},{'author':1, '_id':0})
+    for item in authors:
+        for k,v in item.items():
+            if v not in listAuthor:
+                listAuthor.append(v)
+                
+    num = []
+    recipe = mongo.db.nesting
+    for item in listAuthor:
+        numbers = recipe.find({'author':item}).count()
+        num.append(numbers)
+
     f = open( 'static/js/file.js', 'w+' )
     text = f.read()
     f.write('var myDict = ' + repr(num)+'\n')
@@ -214,27 +228,27 @@ def my_recipes_session():
 
 '''     testing users list no repeat names, count recipes array    '''
 
-listAuthor=[]
-def autorList():
-    recipe = mongo.db.nesting
-    authors = recipe.find({},{'author':1, '_id':0})
-    for item in authors:
-        for k,v in item.items():
-            if v not in listAuthor:
-                listAuthor.append(v)
-    print(listAuthor)
+# listAuthor=[]
+# def autorList():
+#     recipe = mongo.db.nesting
+#     authors = recipe.find({},{'author':1, '_id':0})
+#     for item in authors:
+#         for k,v in item.items():
+#             if v not in listAuthor:
+#                 listAuthor.append(v)
+#     print(listAuthor)
 
-autorList()
+# autorList()
 
-num = []
-def count_recipes():
-    recipe = mongo.db.nesting
-    for item in listAuthor:
-        numbers = recipe.find({'author':item}).count()
-        num.append(numbers)
-    print(num)
+# num = []
+# def count_recipes():
+#     recipe = mongo.db.nesting
+#     for item in listAuthor:
+#         numbers = recipe.find({'author':item}).count()
+#         num.append(numbers)
+#     print(num)
 
-count_recipes()
+# count_recipes()
 
 # dictionary = dict(zip(listAuthor, num))
 # print(dictionary)
