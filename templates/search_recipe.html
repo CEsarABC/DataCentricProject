@@ -6,115 +6,111 @@
 
 <div class="container">
   
-    <div class="jumbotron">
-      <h1 class="display-4">Hello, world!</h1>
-      <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+    <div class="jumbotron jumbo_form">
+      <h1 class="display-4">Search Recipes</h1>
+      <p class="lead">Search by author or if you want to jump any recipes by allergen, maybe you just want
+      one type of cuisine.</p>
     </div>
     
     <!-- graphs -->
-    <div class='row blackbox mb-5'>
-      <canvas id="myChart"></canvas>
-        <script>
-          function graphs(){
-            var listof = myDict
+    <!--<div class='row blackbox mb-2'>-->
+    <!--  <canvas id="myChart"></canvas>-->
+    <!--  <script type="text/javascript" src="{{url_for('static', filename='js/file.js')}}"></script>-->
+    <!--    <script>-->
+    <!--      function graphs(){-->
+    <!--        var listof = myDict-->
           
-            var ctx = document.getElementById("myChart").getContext('2d');
-            var myChart = new Chart(ctx, {
-                type: 'horizontalBar',
-                data: {
-                    labels: myarray,
-                    datasets: [{
-                        label: '# of Recipes',
-                        data: listof,
-                        backgroundColor: [
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(54, 162, 235, 0.2)',
-                            'rgba(255, 206, 86, 0.2)',
-                            'rgba(75, 192, 192, 0.2)',
-                            'rgba(153, 102, 255, 0.2)',
-                            'rgba(255, 159, 64, 0.2)'
-                        ],
-                        borderColor: [
-                            'rgba(255,99,132,1)',
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(255, 206, 86, 1)',
-                            'rgba(75, 192, 192, 1)',
-                            'rgba(153, 102, 255, 1)',
-                            'rgba(255, 159, 64, 1)'
-                        ],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    scales: {
-                        yAxes: [{
-                            ticks: {
-                                beginAtZero:true
-                            }
-                        }]
-                    }
-                }
-            });
-          }
-           graphs();
-        </script>
+    <!--        var ctx = document.getElementById("myChart").getContext('2d');-->
+    <!--        var myChart = new Chart(ctx, {-->
+    <!--            type: 'horizontalBar',-->
+    <!--            data: {-->
+    <!--                labels: myarray,-->
+    <!--                datasets: [{-->
+    <!--                    label: '# of Recipes per Author',-->
+    <!--                    data: listof,-->
+    <!--                    backgroundColor: [-->
+    <!--                        'rgba(255, 99, 132, 0.2)',-->
+    <!--                        'rgba(255, 99, 132, 0.2)',-->
+    <!--                        'rgba(255, 99, 132, 0.2)',-->
+    <!--                        'rgba(255, 99, 132, 0.2)',-->
+    <!--                        'rgba(255, 99, 132, 0.2)',-->
+    <!--                        'rgba(255, 99, 132, 0.2)'-->
+    <!--                    ],-->
+    <!--                    borderColor: [-->
+    <!--                        'rgba(255, 99, 132, 0.2)',-->
+    <!--                        'rgba(255, 99, 132, 0.2)',-->
+    <!--                        'rgba(255, 99, 132, 0.2)',-->
+    <!--                        'rgba(255, 99, 132, 0.2)',-->
+    <!--                        'rgba(255, 99, 132, 0.2)',-->
+    <!--                        'rgba(255, 99, 132, 0.2)'-->
+    <!--                    ],-->
+    <!--                    borderWidth: 1-->
+    <!--                }]-->
+    <!--            },-->
+    <!--            options: {-->
+    <!--                scales: {-->
+    <!--                    yAxes: [{-->
+    <!--                        ticks: {-->
+    <!--                            beginAtZero:true-->
+    <!--                        }-->
+    <!--                    }]-->
+    <!--                }-->
+    <!--            }-->
+    <!--        });-->
+    <!--      }-->
+    <!--       graphs();-->
+    <!--    </script>-->
+    <!--    </div>-->
         
-    </div>
-    <button type='button' name='any' onclick="getdata()" value='click' >this is the button</button>
-    <div class='row' id='test' >
-      
-    </div>
+    
     
     
     <!--  search forms   -->
     
     
-    
-    <form class='row' action="{{ url_for('search_recipe_author') }}" method="POST">
+    <div class="row blackbox">
+      <form class='col' action="{{ url_for('search_recipe_author') }}" method="POST">
       <div class='col-lg-6 col-md-6 col-sm-6'>
             <div class='form-row'>
               <div class="col">
                   <input class="form-control" type="text"  name="author" id="author_name"/>
                   <label for="author_name">Author First Name</label>
               </div>
+              <button class="form-control btn btn-primary" type="submit">Search</button>
             </div>
           </div>
           <!--this submit should update this page with the results
           code in the application should redirect to the same page after validation
           to show results -->
-      <div>
-        <button class="form-control btn btn-primary" type="submit">Search</button>
-      </div>
     </form>
-    <form class='row' action="{{ url_for('search_recipe_allergen') }}" method="POST">
+      <form class='col' action="{{ url_for('search_recipe_allergen') }}" method="POST">
       <div class='col-lg-6 col-md-6 col-sm-6'>
             <div class='form-row'>
               <div class="col">
                   <input class="form-control" type="text"  name="allergen" id="allergen"/>
                   <label for="allergens">filter your allergen</label>
               </div>
+              <button class="form-control btn btn-primary" type="submit">Search</button>
             </div>
           </div>
-      <div>
-        <button class="form-control btn btn-primary" type="submit">Search</button>
-      </div>
     </form>
-    <form class='row' action="{{ url_for('search_recipe_cuisine') }}" method="POST">
+      <form class='col' action="{{ url_for('search_recipe_cuisine') }}" method="POST">
       <div class="col-lg-6 col-md-6 col-sm-6">
             <select class="form-control" name="cuisine" id="cuisine">
-            <option value="" disabled selected>Choose Cuisine</option>
+            <option value="" disabled selected>Cuisine</option>
             {% for item in cuisine %}
             <option value="{{item.cuisine}}">{{item.cuisine}}</option>
             {% endfor %}
             </select>
-            <label>Cuisine Type</label>
+            <label>Cuisine<br>Type</label>
+            <button class="form-control btn btn-primary" type="submit">Search</button>
         </div>
-      <div>
-        <button class="form-control btn btn-primary" type="submit">Search</button>
-      </div>
     </form>
+    </div>
+    
+    
     <div>
-        <div class='row'>
+        <div class='row mt-3'>
             {% if searchAuthor%}
               {% for item in searchAuthor %}
               <div class='col-lg-4 col-md-4 col-sm-4' >
@@ -168,6 +164,6 @@
 
     
 </div>
-<script type="text/javascript" src="{{url_for('static', filename='js/graphs.js')}}"></script>
+
 {% endblock %}
 

@@ -5,13 +5,8 @@
 <!--            HEADER                   -->
 <div class="container">
   <div class="jumbotron">
-    <h1 class="display-4">Hello, world!</h1>
-    <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-    <hr class="my-4">
-    <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-    <p class="lead">
-      <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
-    </p>
+    <h1 class="display-4">Your Recipes!</h1>
+    <p class="lead">Did you forget somethig? ..Better recipe? ..just change it friend! </p>
   </div>
     <form class='row' action="{{ url_for('check_author') }}" method="POST">
       <div class='col-lg-10 col-md-10 col-sm-12'>
@@ -21,8 +16,8 @@
                   <label for="author_name">Author First Name</label>
               </div>
               <div class="col">
-                  <input class="form-control" type="text" name="dob" id="author_dob" required/>
-                  <label for="author">Author D.O.B</label>
+                  <input class="form-control" type="text" name="dob" id="author_dob" placeholder="DD/MM/YY or Password" required/>
+                  <label for="author">D.O.B or Password</label>
               </div>
             </div>
           </div>

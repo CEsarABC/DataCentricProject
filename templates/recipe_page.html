@@ -3,31 +3,79 @@
 {% block content %}
 
 <div class="container">
-    <h1>Recipe page</h1>
     <div class="row">
-        <div class="col-lg-6 col-md-6 col-sm-12 blackbox">
-            <div class="col">
+        <div class="col-lg-6 col-md-6 col-sm-12">
+            <div class="col text-centered">
                 <img class="image-fluid recipe_pic" src="{{ url_for('static',filename='images/dana.jpg') }}"></img>
             </div>
         </div>
-        <div class="col-lg-6 col-md-6 col-sm-12 blackbox">
-            <div class="row blackbox">
-                <h2>{{recipe.recipe_name}}</h2>
+        <div class="col-lg-6 col-md-6 col-sm-12">
+            <div class="row">
+                <h1>{{recipe.recipe_name}}</h1>
+            </div>
+            <div class="row">
+                <div class='col-12'><h2>Allergens</h2></div>
+                <div class='col-12'>
+                    {% for item in recipe.allergens %}
+                    <span>{{item}}/</span>
+                    {% endfor %}
                 </div>
-            <div class="row blackbox">
-                <h2>Allergens</h2>
-                {% for item in recipe.allergens %}
-                <p>{{item}} /</p>
-                {% endfor %}
-                </div>
-            <div class="row blackbox"><p>this is GRAPHS</p></div>
+            </div>
+            <div class="row">
+                <canvas id="myChart"></canvas>
+                <script type="text/javascript" src="{{url_for('static', filename='js/file.js')}}"></script>
+                <script>
+                  function graphs(){
+                    var listof = myDict
+                  
+                    var ctx = document.getElementById("myChart").getContext('2d');
+                    var myChart = new Chart(ctx, {
+                        type: 'horizontalBar',
+                        data: {
+                            labels: myarray,
+                            datasets: [{
+                                label: '# of Recipes per Author',
+                                data: listof,
+                                backgroundColor: [
+                                    'rgba(255, 99, 132, 0.2)',
+                                    'rgba(255, 99, 132, 0.2)',
+                                    'rgba(255, 99, 132, 0.2)',
+                                    'rgba(255, 99, 132, 0.2)',
+                                    'rgba(255, 99, 132, 0.2)',
+                                    'rgba(255, 99, 132, 0.2)'
+                                ],
+                                borderColor: [
+                                    'rgba(255, 99, 132, 0.2)',
+                                    'rgba(255, 99, 132, 0.2)',
+                                    'rgba(255, 99, 132, 0.2)',
+                                    'rgba(255, 99, 132, 0.2)',
+                                    'rgba(255, 99, 132, 0.2)',
+                                    'rgba(255, 99, 132, 0.2)'
+                                ],
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero:true
+                                    }
+                                }]
+                            }
+                        }
+                    });
+                  }
+                  graphs();
+                </script>
+            </div>
             
         </div>
-        <div class="col-lg-6 col-md-6 col-sm-12 blackbox">
+        <div class="col-lg-6 col-md-6 col-sm-12">
             <h2>Ingredients</h2>
             <p>{{recipe.ingredients}}</p>
         </div>
-        <div class="col-lg-6 col-md-6 col-sm-12 blackbox">
+        <div class="col-lg-6 col-md-6 col-sm-12">
             <h2>Method</h2>
             <p>{{recipe.method}}</p>
         </div>
