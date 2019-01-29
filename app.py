@@ -35,7 +35,7 @@ def show_recipe(item_id):
 @app.route('/new_recipe')
 def formfill():
     cuisine= mongo.db.cuisine.find()
-    return render_template('testform.html', cuisine=cuisine)
+    return render_template('new_recipe.html', cuisine=cuisine)
 
 
 ''' working now saving eveything to data base and arrayValues
@@ -88,14 +88,32 @@ def insert_recipe():
         #print(form)
     return redirect(url_for('intro'))
     
-'''         search application                 '''
+'''         search application insert graphs here                '''
 
 
-#@app.route('/')
 @app.route('/search', methods=['POST','GET'])
 def search():
+    listAuthor=[]
+    recipe = mongo.db.nesting
+    authors = recipe.find({},{'author':1, '_id':0})
+    for item in authors:
+        for k,v in item.items():
+            if v not in listAuthor:
+                listAuthor.append(v)
+                
+    num = []
+    recipe = mongo.db.nesting
+    for item in listAuthor:
+        numbers = recipe.find({'author':item}).count()
+        num.append(numbers)
+
+    f = open( 'static/js/file.js', 'w+' )
+    text = f.read()
+    f.write('var myDict = ' + repr(num)+'\n')
+    f.write('var myarray = ' + repr(listAuthor)+'\n')
+    f.close()
     cuisine =  mongo.db.cuisine.find()
-    return render_template('search_recipe.html', cuisine=cuisine)
+    return render_template('search_recipe.html', cuisine=cuisine, listAuthor=listAuthor, num=num)
     
 '''this function takes the imput from a form and replace the 
 values in the query with the vales in the new dictionary created 
@@ -206,6 +224,7 @@ def my_recipes_session():
     nestingCollection =  mongo.db.nesting
     searchfileold = nestingCollection.find({'author':session.get('author'), 'dob':session.get('dob')})
     return render_template('my_recipes_old.html', searchfileold=searchfileold)
+
 
 
     
