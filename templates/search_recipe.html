@@ -5,12 +5,73 @@
 <!--            HEADER                   -->
 
 <div class="container">
+  
     <div class="jumbotron">
       <h1 class="display-4">Hello, world!</h1>
       <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
     </div>
-      <form class='row' action="{{ url_for('search_recipe_author') }}" method="POST">
-          <div class='col-lg-6 col-md-6 col-sm-6'>
+    
+    <!-- graphs -->
+    <div class='row blackbox mb-5'>
+      <canvas id="myChart"></canvas>
+        <script>
+          function graphs(){
+            var listof = myDict
+          
+            var ctx = document.getElementById("myChart").getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'horizontalBar',
+                data: {
+                    labels: myarray,
+                    datasets: [{
+                        label: '# of Recipes',
+                        data: listof,
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255,99,132,1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero:true
+                            }
+                        }]
+                    }
+                }
+            });
+          }
+           graphs();
+        </script>
+        
+    </div>
+    <button type='button' name='any' onclick="getdata()" value='click' >this is the button</button>
+    <div class='row' id='test' >
+      
+    </div>
+    
+    
+    <!--  search forms   -->
+    
+    
+    
+    <form class='row' action="{{ url_for('search_recipe_author') }}" method="POST">
+      <div class='col-lg-6 col-md-6 col-sm-6'>
             <div class='form-row'>
               <div class="col">
                   <input class="form-control" type="text"  name="author" id="author_name"/>
@@ -21,12 +82,12 @@
           <!--this submit should update this page with the results
           code in the application should redirect to the same page after validation
           to show results -->
-        <div>
-          <button class="form-control btn btn-primary" type="submit">Search</button>
-        </div>
-      </form>
-      <form class='row' action="{{ url_for('search_recipe_allergen') }}" method="POST">
-          <div class='col-lg-6 col-md-6 col-sm-6'>
+      <div>
+        <button class="form-control btn btn-primary" type="submit">Search</button>
+      </div>
+    </form>
+    <form class='row' action="{{ url_for('search_recipe_allergen') }}" method="POST">
+      <div class='col-lg-6 col-md-6 col-sm-6'>
             <div class='form-row'>
               <div class="col">
                   <input class="form-control" type="text"  name="allergen" id="allergen"/>
@@ -34,12 +95,12 @@
               </div>
             </div>
           </div>
-        <div>
-          <button class="form-control btn btn-primary" type="submit">Search</button>
-        </div>
-      </form>
-      <form class='row' action="{{ url_for('search_recipe_cuisine') }}" method="POST">
-        <div class="col-lg-6 col-md-6 col-sm-6">
+      <div>
+        <button class="form-control btn btn-primary" type="submit">Search</button>
+      </div>
+    </form>
+    <form class='row' action="{{ url_for('search_recipe_cuisine') }}" method="POST">
+      <div class="col-lg-6 col-md-6 col-sm-6">
             <select class="form-control" name="cuisine" id="cuisine">
             <option value="" disabled selected>Choose Cuisine</option>
             {% for item in cuisine %}
@@ -48,13 +109,11 @@
             </select>
             <label>Cuisine Type</label>
         </div>
-        <div>
-          <button class="form-control btn btn-primary" type="submit">Search</button>
-        </div>
-      </form>
-      
-      
       <div>
+        <button class="form-control btn btn-primary" type="submit">Search</button>
+      </div>
+    </form>
+    <div>
         <div class='row'>
             {% if searchAuthor%}
               {% for item in searchAuthor %}
@@ -106,7 +165,9 @@
           {% endif %}
         </div>
       </div>
-</div>
 
+    
+</div>
+<script type="text/javascript" src="{{url_for('static', filename='js/graphs.js')}}"></script>
 {% endblock %}
 
