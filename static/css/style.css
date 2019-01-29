@@ -33,12 +33,12 @@
 }
 .navbar-brand {
     font-size: 1.5em;
-    font-family: 'yellowtail', cusive;
+    font-family: 'Oleo Script', cusive;
     color: #966F00;
 }
 
 .blackbox {
-    border: solid 1px black;
+    border: solid 1px grey;
     padding: 10px;
 }
 .newimage{
@@ -48,3 +48,81 @@
 .foods{
     font-size: 10em;
 }
+.recipe_pic{
+    width: 350px;
+    height: 450px;
+}
+.jumbo_form{
+    /*height: 200px;*/
+    color: white;
+    padding: 20px;
+    background-image: url('../images/jumbopic3.jpg');
+    background-size: cover;
+}
+.jumbotron{
+    color: white;
+    background-image: url('../images/jumbopic3.jpg');
+    background-size: cover;
+}
+.footer{
+    background-color: lightgrey;
+    margin-top: 20px;
+}
+.myChart{
+    width: 250px;
+    height: 200px
+}
+h1{
+    font-family: 'Oleo Script', cursive;
+}
+h2{
+    font-family: 'Playball', cursive;
+}
+#allergens{
+    color: red;
+}
+.sub{
+    background-color: rgb(0,0,0,0.5);
+    font-size: 1.3em;
+}
+
+
+/*==================================================
+=            Bootstrap 4 Media Queries             =
+==================================================*/
+/* Ultra Large desktops and laptops */
+@media (min-width: 1501px) {
+/* css specific properties col-lg-**/
+  
+}
+
+
+/* Large desktops and laptops */
+@media (min-width: 1200px) and (max-width:1500px) {
+/* css specific properties col-lg-**/
+  
+}
+
+/* Landscape tablets and medium desktops */
+@media (min-width: 992px) and (max-width: 1199px) {
+/* css specific properties col-md-**/
+  
+}
+
+/* Portrait tablets and small desktops */
+@media (min-width: 768px) and (max-width: 991px) {
+/* css specific properties col-sm-**/
+  
+}
+
+/* Landscape phones and portrait tablets */
+@media (max-width: 767px) {
+/* css specific properties col-xs-**/
+  
+}
+
+/* Portrait phones and smaller */
+@media (max-width: 480px) {
+  
+}
+/* css specific properties col-xs-* or none for default*/
