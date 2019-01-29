@@ -10,8 +10,8 @@
             </div>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-12">
-            <div class="row">
-                <h1>{{recipe.recipe_name}}</h1>
+            <div class="row mt-2">
+                <div class='col-12' ><h1>{{recipe.recipe_name}}</h1></div>
             </div>
             <div class="row">
                 <div class='col-12'><h2>Allergens</h2></div>
@@ -21,7 +21,7 @@
                     {% endfor %}
                 </div>
             </div>
-            <div class="row mt-2">
+            <div class="row mt-2" style='padding: 15px'>
                 <canvas id="myChart"></canvas>
                 <script type="text/javascript" src="{{url_for('static', filename='js/file.js')}}"></script>
                 <script>

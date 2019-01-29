@@ -75,9 +75,9 @@
 h1{
     font-family: 'Oleo Script', cursive;
 }
-h2{
-    font-family: 'Playball', cursive;
-}
+/*h2{*/
+/*    font-family: 'Playball', cursive;*/
+/*}*/
 #allergens{
     color: red;
 }
@@ -93,36 +93,78 @@ h2{
 /* Ultra Large desktops and laptops */
 @media (min-width: 1501px) {
 /* css specific properties col-lg-**/
-  
+  .recipe_pic{
+    width: 350px;
+    height: 450px;
+}
 }
 
 
 /* Large desktops and laptops */
 @media (min-width: 1200px) and (max-width:1500px) {
 /* css specific properties col-lg-**/
-  
+  .recipe_pic{
+    width: 350px;
+    height: 450px;
+}
 }
 
 /* Landscape tablets and medium desktops */
 @media (min-width: 992px) and (max-width: 1199px) {
 /* css specific properties col-md-**/
-  
+  .recipe_pic{
+    width: 350px;
+    height: 450px;
+}
 }
 
 /* Portrait tablets and small desktops */
 @media (min-width: 768px) and (max-width: 991px) {
 /* css specific properties col-sm-**/
-  
+  .recipe_pic{
+    width: 300px;
+    height: 380px;
+ }
+ h2{
+     font-size: 1.5em;
+ }
+ .card{
+     width: 9rem;
+ }
+ 
 }
 
 /* Landscape phones and portrait tablets */
 @media (max-width: 767px) {
 /* css specific properties col-xs-**/
-  
+  .recipe_pic{
+    width: 300px;
+    height: 380px;
+ }
+ h2{
+     font-size: 1.5em;
+ }
+ .card{
+     width: 9rem;
+ }
+ 
 }
 
 /* Portrait phones and smaller */
 @media (max-width: 480px) {
-  
+ h1{
+    font-size: 2em;
+ }
+ h2{
+     font-size: 1.5em;
+ }
+ .recipe_pic{
+    width: 300px;
+    height: 380px;
+ }
+ .card{
+     width: 9rem;
+ }
+ 
 }
 /* css specific properties col-xs-* or none for default*/

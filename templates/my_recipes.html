@@ -9,7 +9,7 @@
     <span class='sub'>Did you forget somethig? ..Better recipe? ..just change it friend! </span>
   </div>
     <form class='row' action="{{ url_for('check_author') }}" method="POST">
-      <div class='col-lg-10 col-md-10 col-sm-12'>
+      <div class='col-lg-12 col-md-12 col-sm-12'>
             <div class='form-row'>
               <div class="col">
                   <input class="form-control" type="text"  name="author" id="author_name" required/>
@@ -20,24 +20,22 @@
                   <label for="author">D.O.B or Password</label>
               </div>
             </div>
+            <button class="form-control btn btn-primary" type="submit">Search</button>
           </div>
           <!--this submit should update this page with the results
           code in the application should redirect to the same page after validation
           to show results -->
-        <div>
-          <button class="form-control btn btn-primary" type="submit">Search</button>
-        </div>
       </form>
       
-      <div class='row'>
+      <div class='row mt-3'>
         {% if searchfile %}
-        <h2>Welcome {{authorName}}</h2>
+        <h2>Welcome Back {{authorName}}!</h2>
         {% endif %}
       </div>
       
       
       <div>
-        <div class='row'>
+        <div class='row mt-3'>
           {% for item in searchfile %}
           <div class='col-lg-4 col-md-4 col-sm-4' >
             <div class="card" style="width: 18rem;">
