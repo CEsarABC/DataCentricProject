@@ -20,6 +20,12 @@ def intro():
 def contact():
     return render_template('contact.html')
     
+@app.route('/Recipes')
+def all_recipes():
+    recipes =  mongo.db.nesting
+    allrecipes = recipes.find()
+    return render_template('all_recipes.html', allrecipes=allrecipes)
+    
     
 '''     show recipe        '''    
 @app.route('/recipe/<item_id>')
@@ -53,7 +59,7 @@ def insert_recipe():
         print(form_one)
         for k, v in form_one.items():
             if k not in ('author_name','author_dob','recipe_name','recipe_description','cuisine_name','serves','cooking_time', 'ingredients','method'):
-            #if k != 'task_name' and k != 'task_description' and  k != 'radio':
+            #Taking all allergens from the form 
                 arrayValues.append(v)
         #print(arrayValues)
         name = request.form.get('author_name')
@@ -66,7 +72,6 @@ def insert_recipe():
         ingredients = request.form.get('ingredients')
         method = request.form.get('method')
         
-        #print(description + name)
         
         form = {
             'author': name,
