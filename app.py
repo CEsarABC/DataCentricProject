@@ -18,6 +18,7 @@ mongo = PyMongo(app)
 
 @app.route('/')
 def intro():
+    transferToJS()
     return render_template('intro.html')
     
 ''' route to the contact page '''
@@ -62,6 +63,8 @@ selected values from form was evident as multiple selection was needed.
 allergens is passed as an array of strings'''
 ''' couple of variables are converted in order to avoid errors later on,
 strings converted to intergers and is capitalized '''
+''' the variable dob is used only for validation and it helps later on to
+retrieve recipes in edition mode'''
 
 
 @app.route('/insert_recipe', methods=['POST'])
@@ -77,7 +80,7 @@ def insert_recipe():
             #Taking all allergens from the form 
                 arrayValues.append(v)
         #print(arrayValues)
-        name = request.form.get('author_name')
+        name = request.form.get('author_name').capitalize()
         dob = request.form.get('author_dob')
         nrecipe = request.form.get('recipe_name')
         description = request.form.get('recipe_description')
@@ -108,12 +111,19 @@ def insert_recipe():
         #print(form)
     return redirect(url_for('formfill'))
     
-'''  search brings the search page, more importantly the search route,
-has a elaborated code which makes a total array '''
 
-
-@app.route('/search', methods=['POST','GET'])
-def search():
+'''  tranferToJS brings the search page, more importantly the search route,
+has a elaborated code which makes two arrays, one for authors names,
+another one for total recipes.
+these two arrays get passed to a js document created by python,
+the arrays are passed and formated to javascript in order to be referenced
+later on by the graphs used from charts.js'''
+''' the file.js is opened and edited by python everytime we open this page,
+the information gets updated because the method w+ re-writes the previous information,
+keeping the document up to date'''
+    
+    
+def transferToJS():
     listAuthor=[]
     recipe = mongo.db.nesting
     authors = recipe.find({},{'author':1, '_id':0})
@@ -134,7 +144,15 @@ def search():
     f.write('var myarray = ' + repr(listAuthor)+'\n')
     f.close()
     cuisine =  mongo.db.cuisine.find()
-    return render_template('search_recipe.html', cuisine=cuisine, listAuthor=listAuthor, num=num)
+    
+''' search uses transferToJS function to update file.js. renders the form
+for search by autor, allegen filter and cuisine'''
+
+@app.route('/search', methods=['POST','GET'])
+def search():
+    transferToJS()
+    cuisine =  mongo.db.cuisine.find()
+    return render_template('search_recipe.html', cuisine=cuisine)
     
 '''this function takes the imput from a form and replace the 
 values in the query with the vales in the new dictionary created 
@@ -145,37 +163,51 @@ def my_recipes():
     nestingCollection =  mongo.db.nesting
     return render_template('my_recipes.html')
 
+''' this route search and validates the user to edit and delete his/her recipes.
+by quering the author name and a variable which is only stored in the data base recipes,
+we authorize the author to view the recipes and edit or delete'''
+''' flask sessions used  '''
 
 @app.route('/authors', methods=['POST','GET'])
 def check_author():
     nestingCollection =  mongo.db.nesting
-    nesting=request.form.to_dict()## why to dictionary just bring the values?????
+    nesting=request.form.to_dict()
     items = nesting.items()
     author = nesting.get('author')
     dob = nesting.get('dob')
-    session['author'] = request.form['author']
-    session['dob']= request.form['dob']
+    # session['author'] = request.form['author']
+    # session['dob']= request.form['dob']
     searchfile = nestingCollection.find({'author':author.capitalize(), 'dob':dob})
     return render_template('my_recipes.html', searchfile = searchfile, authorName=author.capitalize(),author=author,dob=dob)
+    
+    
+''' we search by input where capitalize() method is applied to match the storing form
+and avoid errors '''
     
 @app.route('/search_recipe_author', methods=['POST','GET'])
 def search_recipe_author():
     recipes = mongo.db.nesting
     cuisine =  mongo.db.cuisine.find()
     recipe=request.form.to_dict()## why to dictionary just bring the values?????
-    author = (recipe.get('author')).lower()
+    author = (recipe.get('author')).capitalize()
 
     return render_template('search_recipe.html', searchAuthor = recipes.find({'author':author}), cuisine=cuisine)
+    
+    
+''' not equal is used to filter allergens recipes.find({'allergen':{"$ne" : allergen}}), looks into an array '''
     
 @app.route('/search_recipe_allergen', methods=['POST','GET'])
 def search_recipe_allergen():
     recipes = mongo.db.nesting
     cuisine =  mongo.db.cuisine.find()
     recipe=request.form.to_dict()## why to dictionary just bring the values?????
-    allergen = recipe.get('allergen')
+    allergen = (recipe.get('allergen')).lower()
     
     return render_template('search_recipe.html', searchAuthor = recipes.find({'allergen':{"$ne" : allergen}}), cuisine=cuisine)
     
+    
+''' this query looks into a collection of documents where every document is a cuisine type  '''
+
 @app.route('/search_recipe_cuisine', methods=['POST','GET'])
 def search_recipe_cuisine():
     recipes = mongo.db.nesting
@@ -187,7 +219,8 @@ def search_recipe_cuisine():
     return render_template('search_recipe.html', searchAuthor = recipes.find({'cuisine':cuisine1}), cuisine=cuisine)
 
 
-'''     editing recipe    '''
+'''     editing recipe template is called, the id reference is passed from the previous page and 
+all the information is avaliable. the information is renderend into the correspondent fields '''
 
 
 @app.route('/edit_recipe/<item_id>')
@@ -196,6 +229,8 @@ def edit_recipe(item_id):
     cuisine =  mongo.db.cuisine.find()
     return render_template('edit_recipe.html', recipe=the_recipe, cuisine=cuisine)
 
+''' similar to new recipe the form is converted to a dictionary and all its values are
+then passed to a form which follows the schema'''
 
 @app.route('/update_recipe/<recipe_id>', methods=["POST"])
 def update_recipe(recipe_id):
@@ -234,19 +269,14 @@ def update_recipe(recipe_id):
     })
     return redirect(url_for('my_recipes_session'))
     
+    
+''' takes the id from the recipe page and deletes the item '''
 
 @app.route('/delete_recipe/<item_id>')
 def delete_recipe(item_id):
     mongo.db.nesting.remove({'_id': ObjectId(item_id)})
     return redirect(url_for('my_recipes_session'))
     
-@app.route('/my_recipes_old', methods=['POST','GET'])
-def my_recipes_session():
-    nestingCollection =  mongo.db.nesting
-    searchfileold = nestingCollection.find({'author':session.get('author'), 'dob':session.get('dob')})
-    return render_template('my_recipes_old.html', searchfileold=searchfileold)
-
-
 
     
 if __name__ == '__main__':
