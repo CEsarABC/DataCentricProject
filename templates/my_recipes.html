@@ -37,7 +37,7 @@
       <div>
         <div class='row mt-3'>
           {% for item in searchfile %}
-          <div class='col-lg-4 col-md-4 col-sm-4' >
+          <div class='col-lg-4 col-md-4 col-sm-4 mb-2' >
             <div class="card" style="width: 18rem;">
               <img class="card-img-top image-fluid" src="{{item.images_small}}" alt="Card image cap">
               <div class="card-body">
@@ -45,6 +45,7 @@
                 <p class="card-text">{{item.description}}</p>
                 <a href="{{url_for('edit_recipe', item_id=item._id)}}" class="btn btn-primary">Edit</a>
                 <a href="{{url_for('delete_recipe', item_id=item._id, author=author, dob=dob)}}" class="btn btn-primary">Delete</a>
+                <a href="{{ url_for('show_recipe', item_id=item._id) }}" class="btn btn-primary">View Recipe</a>
               </div>
           </div>
           </div>

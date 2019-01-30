@@ -1,2 +1,2 @@
-var myDict = [1, 3, 4]
-var myarray = ['Kim', 'Cesar', 'Oscar']
+var myDict = [1, 12, 14, 1]
+var myarray = ['Kim', 'Cesar', 'Oscar', 'Sam']

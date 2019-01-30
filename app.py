@@ -166,7 +166,7 @@ def my_recipes():
 ''' this route search and validates the user to edit and delete his/her recipes.
 by quering the author name and a variable which is only stored in the data base recipes,
 we authorize the author to view the recipes and edit or delete'''
-''' flask sessions used  '''
+''' flask sessions used just for testing '''
 
 @app.route('/authors', methods=['POST','GET'])
 def check_author():

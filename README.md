@@ -73,8 +73,8 @@ This project delivers by using the mongo data base, which is flexible and intuit
 ## UX
 - This development presents th content to the users and let them chose what path they want to take.
 - The information in simple and clean manner
-- the introduction invites the users to interact and find wht they are looking for.
-
+- the introduction invites the users to interact and find what they are looking for.
+- Images are compresed and light so the user don't experience delays 
 
 
 ## Features
@@ -85,6 +85,7 @@ This project delivers by using the mongo data base, which is flexible and intuit
 - User validation for editing or deleting recipes
 - User is able to retrieve all his/her recipes for edition or deletion
 - User can see how many recipes all users have
+- Forms are not case sensitive to avoid problems trying to access any data
 
 ### Left to Implement
 Bringing this project to life took some time and some ideas where left on the side just because of the time left to finish my course.
