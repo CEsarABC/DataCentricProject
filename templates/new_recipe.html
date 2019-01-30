@@ -123,9 +123,15 @@
           </div>
         </div>
         <div class="col-12">
-          <button class="form-control btn btn-primary" type="submit">Add Recipe</button>
+          <button class="form-control btn btn-primary" type="submit" onclick="alertScreen()">Add Recipe</button>
         </div>
       </form>
+      <script>
+        function alertScreen() {
+            alert('Your Recipe has beed added!')
+        }
+      </script>
+      
 </div>
 
 {% endblock %}

@@ -62,7 +62,7 @@ def insert_recipe():
             #Taking all allergens from the form 
                 arrayValues.append(v)
         #print(arrayValues)
-        name = request.form.get('author_name')
+        name = (request.form.get('author_name')).capitalize()
         dob = request.form.get('author_dob')
         nrecipe = request.form.get('recipe_name')
         description = request.form.get('recipe_description')
@@ -84,14 +84,14 @@ def insert_recipe():
             'ingredients': ingredients,
             'method': method,
             'views': 0,
-            "images_small": "/static/images/dishes0.jpg",
-            "images_large": "/static/images/dishesL0.jpg",
+            "images_small": "/static/images/dish1.jpg",
+            "images_large": "/static/images/dishL1.jpg",
             'allergens': arrayValues
                 }
         recipe.insert_one(form)
        
         #print(form)
-    return redirect(url_for('intro'))
+    return redirect(url_for('formfill'))
     
 '''         search application insert graphs here                '''
 

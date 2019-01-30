@@ -70,42 +70,29 @@
     
     <div class="row blackbox">
       <form class='col' action="{{ url_for('search_recipe_author') }}" method="POST">
-      <div class='col-lg-6 col-md-6 col-sm-6'>
-            <div class='form-row'>
-              <div class="col">
-                  <input class="form-control" type="text"  name="author" id="author_name"/>
-                  <label for="author_name">Author First Name</label>
-              </div>
-              <button class="form-control btn btn-primary" type="submit">Search</button>
-            </div>
-          </div>
-          <!--this submit should update this page with the results
-          code in the application should redirect to the same page after validation
-          to show results -->
-    </form>
+        <div class="col">
+          <input class="form-control" type="text"  name="author" id="author_name"/>
+          <label for="author_name">Author First Name</label>
+          <button class="form-control btn btn-primary" type="submit">Search</button>
+        </div>
+      </form>
       <form class='col' action="{{ url_for('search_recipe_allergen') }}" method="POST">
-      <div class='col-lg-6 col-md-6 col-sm-6'>
-            <div class='form-row'>
-              <div class="col">
-                  <input class="form-control" type="text"  name="allergen" id="allergen"/>
-                  <label for="allergens">filter your allergen</label>
-              </div>
-              <button class="form-control btn btn-primary" type="submit">Search</button>
-            </div>
-          </div>
-    </form>
-      <form class='col' action="{{ url_for('search_recipe_cuisine') }}" method="POST">
-      <div class="col-lg-6 col-md-6 col-sm-6">
-            <select class="form-control" name="cuisine" id="cuisine">
+        <div class='col'>
+            <input class="form-control" type="text"  name="allergen" id="allergen"/>
+            <label for="allergens">Filter your allergen</label>
+            <button class="form-control btn btn-primary" type="submit">Search</button>
+        </div>
+      </form>
+        <form class='col' action="{{ url_for('search_recipe_cuisine') }}" method="POST">
+          <select class="col form-control" name="cuisine" id="cuisine">
             <option value="" disabled selected>Cuisine</option>
             {% for item in cuisine %}
             <option value="{{item.cuisine}}">{{item.cuisine}}</option>
             {% endfor %}
-            </select>
-            <label>Cuisine<br>Type</label>
-            <button class="form-control btn btn-primary" type="submit">Search</button>
-        </div>
-    </form>
+          </select>
+          <label>Cuisine Type</label>
+          <button class="form-control btn btn-primary" type="submit">Search</button>
+      </form>
     </div>
     
     

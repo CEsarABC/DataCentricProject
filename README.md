@@ -41,6 +41,7 @@ This project delivers by using the mongo data base, which is flexible and intuit
 - CSS
 - Bootstrap 4.0
 - Python 3.6
+    - PyMongo
 - JavaScript
 - Charts.js
 - Flask
@@ -62,13 +63,13 @@ This project delivers by using the mongo data base, which is flexible and intuit
 
 
   - app.py **(main application)**
-  
+ 
 
 ## UX
 - This development presents th content to the users and let them chose what path they want to take.
 - The information in simple and clean manner
 - the introduction invites the users to interact and find wht they are looking for.
-- 
+
 
 
 ## Features
@@ -81,23 +82,65 @@ This project delivers by using the mongo data base, which is flexible and intuit
 - User can see how many recipes all users have
 
 ### Left to Implement
-Bringing this project to life took some time and some ideas where left on the side just because of time
+Bringing this project to life took some time and some ideas where left on the side just because of the time left to finish my course.
 - [ ] A better and more complete search section
 - [ ] giving the user option to upload their own pictures
 - [ ] adding more grahps to display more information on the database
 - [ ] more visually appealing design 
 - [ ] pagination for extensive results
+- [ ] limit to the amount of results in the graph
+- [ ] code auto format for ingredients and method sections
+
+## Database Schema
+I decided that mongoDB was the best database I could use in my project. I needed flexibility
+and my data was not extensive enought for me to create a relational database to extract information.
+my collections then where divided between the document which was going to all the information about
+the recipe and the options which could possibly make part in the recipe. As choices in cuisine
+that was supported by having its own document whit data avaliable for the user, when creating or editing new recipes.
+
+the Database structure:
+- recipes database
+  - collection of recipes
+  - collection of cuisines
+  
+The schema used for the main document:
+- 'author': name                    (used for verification)   
+- 'dob': dob                        (used for verification)
+- 'recipe_name': nrecipe            (new document)
+- 'description': description        (information)
+- 'cuisine': cuisine                (information)
+- 'serves': serves                  (information)
+- 'time': ctime                     (information)
+- 'ingredients': ingredients        (information)
+- 'method': method                  (information)
+- 'views': 0                        (views count and record)
+- "images_small": "/dishes0.jpg"    (image link for card)
+- "images_large": "/dishesL0.jpg"   (image link for recipe page)
+- 'allergens': arrayValues          (array created with the selected allergens)
+
+
 
 ## Testing
 
+- mostly manual testing, all modules in the python application where developed
+individually and the assembled into the full application
+- Modules tested:
+- [x] reading from data base
+- [x] queries from data base
+- [x] use of flask to bring data to html documents
+- [x] inserting and modifing from database
+- [x] use of python to extract data from database
+- [x] use of python to create basic javascript documents 
+- [x] passing data from database to charts 
 
+- Tests have been made for media queries in different formats from pc to mobile
+- heroku deployemnt tested
 
 
 
 ## Deployment
-- Project fully deployed to Heroku  https://practical-project.herokuapp.com/
-  - The project was deployed following the guidelines from the code academy materials
-  - Working in virtual environment
+- Project fully deployed to Heroku  https://cooking-book-cb.herokuapp.com/
+  - The project was deployed following the guidelines from the code Institute materials
   - New project was created in Heroku
   - requirements.txt was created
   - Procfile was created
@@ -105,50 +148,40 @@ Bringing this project to life took some time and some ideas where left on the si
   - Configuration variables were changed as indicated to have 'IP' = (0.0.0.0) and 'PORT' = (5000)
 
 
-- To run this code locally I have some lines of code, one to use in cloud9 and one to use in any other IDE like Atom which I used when not connected to the internet
-
-- The last Python version enabled for cloud9 was installed **Python-3.6.2** in order to create the virtual environment based on it. Code taken from https://packaging.python.org/guides/installing-using-pip-and-virtualenv/
-
-- My project in cloud9 had the pip module updated to the last version and the module **virtualenv** installed to manage my environment
-- After the environment was created based on python3.6 flask was installed
+- pip3 used to install pymongo
 
 - Requirements.txt
     - Click==7.0
     - Flask==1.0.2
-    - itsdangerous==1.1.0
+    - Flask-PyMongo==2.2.0
     - Jinja2==2.10
     - MarkupSafe==1.1.0
     - Werkzeug==0.14.1
+    - itsdangerous==1.1.0
+    - pymongo==3.7.2
+
 
 **Running locally - in the terminal**
-- To run this application outside the virtual environment `$ python3 app.py`
-- To activate the virtual environment `$ source env/bin/activate`
-- To run this application inside the virtual environment `$ python app.py`
+- To run this application in cloud9 `$ python3 app.py`
+
 
 ## Credits
 
-- Some samples where taken from http://flask.pocoo.org/docs/0.12/testing/ for testing flask sessions
 - This module was complemented through a couple of courses from **Udemy**
-  - Automated software testing with python
+  - MongoDB - The Complete Developer's Guide
   - Python and Flask bootcamp
-- Victor Miclovich **(Mentor)**
+- https://docs.mongodb.com/
+- Samll blocks of code taken from boostrap 4.0 web page 
 
 ## Media
 - Fonts taken from google fonts
-- No other external media used
+- images taken from https://unsplash.com/search/photos/food
+- charts from https://www.chartjs.org/
+- images taken from https://www.freepik.com/free-photos-vectors/food
 
 ## Acknowledgments
 Thank you to the code institute for the support. This last project has been challenging and took me some time to develop. I have learned a lot and I hope to keep learning to become the professional I want to be.
 Thank you to the slack channels for the support and the code academy tutors which always had answers to help me move forward.
 
-Merry Christmas and happy New Year friends.
 
-https://unsplash.com/search/photos/food
 
-https://getbootstrap.com/
-
-https://dc-js.github.io/dc.js/
-
-https://docs.mongodb.com/manual/reference/method/js-cursor/
-
-<a href="https://www.freepik.com/free-photos-vectors/food">Food vector created by bimbimkha - www.freepik.com</a>
