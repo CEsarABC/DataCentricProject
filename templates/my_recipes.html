@@ -10,50 +10,44 @@
   </div>
     <form class='row' action="{{ url_for('check_author') }}" method="POST">
       <div class='col-lg-12 col-md-12 col-sm-12'>
-            <div class='form-row'>
-              <div class="col">
-                  <input class="form-control" type="text"  name="author" id="author_name" required/>
-                  <label for="author_name">Author First Name</label>
-              </div>
-              <div class="col">
-                  <input class="form-control" type="text" name="dob" id="author_dob" placeholder="DD/MM/YY or Password" required/>
-                  <label for="author">D.O.B or Password</label>
-              </div>
-            </div>
+        <div class='form-row'>
+          <div class="col">
+            <input class="form-control" type="text"  name="author" id="author_name" required/>
+            <label for="author_name">Author First Name</label>
+          </div>
+          <div class="col">
+            <input class="form-control" type="text" name="dob" id="author_dob" placeholder="DD/MM/YY or Password" required/>
+            <label for="author">D.O.B or Password</label>
+          </div>
+          </div>
             <button class="form-control btn btn-primary" type="submit">Search</button>
           </div>
           <!--this submit should update this page with the results
           code in the application should redirect to the same page after validation
           to show results -->
-      </form>
+    </form>
       
-      <div class='row mt-3'>
-        {% if searchfile %}
-        <h2>Welcome Back {{authorName}}!</h2>
-        {% endif %}
-      </div>
-      
-      
-      <div>
-        <div class='row mt-3'>
-          {% for item in searchfile %}
-          <div class='col-lg-4 col-md-4 col-sm-4 mb-2' >
-            <div class="card" style="width: 18rem;">
-              <img class="card-img-top image-fluid" src="{{item.images_small}}" alt="Card image cap">
-              <div class="card-body">
-                <h5 class="card-title">{{item.recipe_name}}</h5>
-                <p class="card-text">{{item.description}}</p>
-                <a href="{{url_for('edit_recipe', item_id=item._id)}}" class="btn btn-primary">Edit</a>
-                <a href="{{url_for('delete_recipe', item_id=item._id, author=author, dob=dob)}}" class="btn btn-primary">Delete</a>
-                <a href="{{ url_for('show_recipe', item_id=item._id) }}" class="btn btn-primary">View Recipe</a>
-              </div>
-          </div>
-          </div>
-          
-          {% endfor %}
+    <div class='row mt-3'>
+    {% if searchfile %}
+      <h2>Welcome Back {{authorName}}!</h2>
+    {% endif %}
+    </div>
+    <div class='row mt-3'>
+    {% for item in searchfile %}
+      <div class="card text-center mb-3 col-lg-3 col-md-4 col-sm-6 col-12" style="width: 9rem;">
+        <img class="card-img-top image-fluid" src="{{item.images_small}}" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">{{item.recipe_name}}</h5>
+          <p class="card-text">{{item.description}}</p>
+          <a href="{{url_for('edit_recipe', item_id=item._id)}}" class="btn btn-primary">Edit</a>
+          <a href="{{url_for('delete_recipe', item_id=item._id, author=author, dob=dob)}}" class="btn btn-primary">Delete</a>
+          <a href="{{ url_for('show_recipe', item_id=item._id) }}" class="btn btn-primary">View</a>
         </div>
       </div>
+        {% endfor %}
+    </div>
 </div>
+
 
 {% endblock %}
 

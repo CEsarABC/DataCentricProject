@@ -95,61 +95,51 @@
       </form>
     </div>
     
-    
-    <div>
-        <div class='row mt-3'>
-            {% if searchAuthor%}
-              {% for item in searchAuthor %}
-              <div class='col-lg-4 col-md-4 col-sm-4' >
-                <div class="card" style="width: 18rem;">
-                  <img class="card-img-top image-fluid" src="{{item.images_small}}" alt="Card image cap">
-                  <div class="card-body">
-                    <h5 class="card-title">{{item.recipe_name}}</h5>
-                    <p class="card-text">{{item.description}}</p>
-                    <a href="{{ url_for('show_recipe', item_id=item._id) }}" class="btn btn-primary">View Recipe</a>
-                  </div>
-              </div>
-              </div>
-              {% endfor %}
-            {% endif %}
+  <div class='row mt-3'>
+  {% if searchAuthor%}
+  {% for item in searchAuthor %}
+    <div class="card text-center mb-3 col-lg-3 col-md-4 col-sm-6 col-12" style="width: 9rem;">
+      <img class="card-img-top image-fluid" src="{{item.images_small}}" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">{{item.recipe_name}}</h5>
+          <p class="card-text">{{item.description}}</p>
+          <a href="{{ url_for('show_recipe', item_id=item._id) }}" class="btn btn-primary">View Recipe</a>
         </div>
-        <div class='row'>
-            {% if searchAllergen%}
-          {% for item in searchAllergen %}
-          <div class='col-lg-4 col-md-4 col-sm-4' >
-            <div class="card" style="width: 18rem;">
-              <img class="card-img-top image-fluid" src="{{item.images_small}}" alt="Card image cap">
-              <div class="card-body">
-                <h5 class="card-title">{{item.recipe_name}}</h5>
-                <p class="card-text">{{item.description}}</p>
-                <a href="{{ url_for('show_recipe', item_id=item._id) }}" class="btn btn-primary">View Recipe</a>
-              </div>
-          </div>
-          </div>
-          
-          {% endfor %}
-          {% endif %}
-        </div>
-        <div class='row'>
-            {% if searchCuisine%}
-          {% for item in searchCuisine %}
-          <div class='col-lg-4 col-md-4 col-sm-4' >
-            <div class="card" style="width: 18rem;">
-              <img class="card-img-top image-fluid" src="{{item.images_small}}" alt="Card image cap">
-              <div class="card-body">
-                <h5 class="card-title">{{item.recipe_name}}</h5>
-                <p class="card-text">{{item.description}}</p>
-                <a href="{{ url_for('show_recipe', item_id=item._id) }}" class="btn btn-primary">View Recipe</a>
-              </div>
-          </div>
-          </div>
-          
-          {% endfor %}
-          {% endif %}
-        </div>
+    </div>
+    {% endfor %}
+    {% endif %}
+  </div>
+  
+  <div class='row'>
+  {% if searchAllergen%}
+  {% for item in searchAllergen %}
+    <div class="card text-center mb-3 col-lg-3 col-md-4 col-sm-6 col-12" style="width: 9rem;">
+      <img class="card-img-top image-fluid" src="{{item.images_small}}" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">{{item.recipe_name}}</h5>
+        <p class="card-text">{{item.description}}</p>
+        <a href="{{ url_for('show_recipe', item_id=item._id) }}" class="btn btn-primary">View Recipe</a>
       </div>
-
+    </div>
+    {% endfor %}
+    {% endif %}
+  </div>
     
+    
+  <div class='row'>
+  {% if searchCuisine%}
+  {% for item in searchCuisine %}
+    <div class="card text-center mb-3 col-lg-3 col-md-4 col-sm-6 col-12" style="width: 9rem;">
+      <img class="card-img-top image-fluid" src="{{item.images_small}}" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">{{item.recipe_name}}</h5>
+          <p class="card-text">{{item.description}}</p>
+          <a href="{{ url_for('show_recipe', item_id=item._id) }}" class="btn btn-primary">View Recipe</a>
+        </div>
+    </div>
+     {% endfor %}
+    {% endif %}
+  </div>
 </div>
 
 {% endblock %}
