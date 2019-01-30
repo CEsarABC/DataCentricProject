@@ -3,6 +3,9 @@ from flask import Flask, render_template, redirect, request, url_for,session
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 
+''' flask application set and secret key for sessions, mongoDB
+is setted acording to Data base'''
+
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'mykey'
 
@@ -11,14 +14,19 @@ app.config["MONGO_URI"] = 'mongodb://recipes:Mongo3@ds021026.mlab.com:21026/reci
 
 mongo = PyMongo(app)
 
+''' route to the first page to greed the user '''
 
 @app.route('/')
 def intro():
     return render_template('intro.html')
     
+''' route to the contact page '''
+    
 @app.route('/contact')
 def contact():
     return render_template('contact.html')
+    
+'''brings data from the database and shows all recipes in collection '''
     
 @app.route('/Recipes')
 def all_recipes():
@@ -27,7 +35,9 @@ def all_recipes():
     return render_template('all_recipes.html', allrecipes=allrecipes)
     
     
-'''     show recipe        '''    
+'''  takes the data sent from the recipes page and uses the id to 
+isolate one document by its id '''
+
 @app.route('/recipe/<item_id>')
 def show_recipe(item_id):
     the_recipe =  mongo.db.nesting.find_one({"_id": ObjectId(item_id)})
@@ -35,18 +45,23 @@ def show_recipe(item_id):
     return render_template('recipe_page.html', recipe=the_recipe, cuisine=cuisine)
     
     
-'''         insert recipe application                '''
+''' brings the page where the form is, for the new recipes
+the form is linked by action to a route which handles the data after validation'''
 
-''' inserts one dictionary when the form in addtask.html is submited '''
 @app.route('/new_recipe')
 def formfill():
     cuisine= mongo.db.cuisine.find()
     return render_template('new_recipe.html', cuisine=cuisine)
 
 
-''' working now saving eveything to data base and arrayValues
-    of allergens working perfectly, filtering other values from dictionary 
-    saving to two collections at the same time '''
+''' insert recipe brings the data from the form and converts it into a
+dictionary, where every key stores its value in a variable to be used in
+the new form, which uses the schema selected '''
+''' the allergens part was complex. the need to create an array with 
+selected values from form was evident as multiple selection was needed.
+allergens is passed as an array of strings'''
+''' couple of variables are converted in order to avoid errors later on,
+strings converted to intergers and is capitalized '''
 
 
 @app.route('/insert_recipe', methods=['POST'])
@@ -62,7 +77,7 @@ def insert_recipe():
             #Taking all allergens from the form 
                 arrayValues.append(v)
         #print(arrayValues)
-        name = (request.form.get('author_name')).capitalize()
+        name = request.form.get('author_name')
         dob = request.form.get('author_dob')
         nrecipe = request.form.get('recipe_name')
         description = request.form.get('recipe_description')
@@ -93,7 +108,8 @@ def insert_recipe():
         #print(form)
     return redirect(url_for('formfill'))
     
-'''         search application insert graphs here                '''
+'''  search brings the search page, more importantly the search route,
+has a elaborated code which makes a total array '''
 
 
 @app.route('/search', methods=['POST','GET'])
@@ -139,7 +155,7 @@ def check_author():
     dob = nesting.get('dob')
     session['author'] = request.form['author']
     session['dob']= request.form['dob']
-    searchfile = nestingCollection.find({'author':author.lower(), 'dob':dob})
+    searchfile = nestingCollection.find({'author':author.capitalize(), 'dob':dob})
     return render_template('my_recipes.html', searchfile = searchfile, authorName=author.capitalize(),author=author,dob=dob)
     
 @app.route('/search_recipe_author', methods=['POST','GET'])
