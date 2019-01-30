@@ -3,25 +3,25 @@
 {% block content %}
 
 <div class="container">
-    <div class="row">
-        <div class="col-lg-6 col-md-6 col-sm-12">
+    <section class="row">
+        <figure class="col-lg-6 col-md-6 col-sm-12">
             <div class="col text-centered">
                 <img class="image-fluid recipe_pic" src="{{recipe.images_large}}"></img>
             </div>
-        </div>
-        <div class="col-lg-6 col-md-6 col-sm-12">
-            <div class="row mt-2">
+        </figure>
+        <section class="col-lg-6 col-md-6 col-sm-12">
+            <header class="row mt-2">
                 <div class='col-12' ><h1>{{recipe.recipe_name}}</h1></div>
-            </div>
-            <div class="row">
+            </header>
+            <article class="row">
                 <div class='col-12'><h2>Allergens</h2></div>
                 <div class='col-12'>
                     {% for item in recipe.allergens %}
                     <span>{{item}}/</span>
                     {% endfor %}
                 </div>
-            </div>
-            <div class="row mt-2" style='padding: 15px'>
+            </article>
+            <figure class="row mt-2" style='padding: 15px'>
                 <canvas id="myChart"></canvas>
                 <script type="text/javascript" src="{{url_for('static', filename='js/file.js')}}"></script>
                 <script>
@@ -68,18 +68,17 @@
                   }
                   graphs();
                 </script>
-            </div>
-            
-        </div>
-        <div class="col-lg-6 col-md-6 col-sm-12">
+            </figure>
+        </section>
+        <article class="col-lg-6 col-md-6 col-sm-12">
             <h2>Ingredients</h2>
             <p>{{recipe.ingredients}}</p>
-        </div>
-        <div class="col-lg-6 col-md-6 col-sm-12">
+        </article>
+        <article class="col-lg-6 col-md-6 col-sm-12">
             <h2>Method</h2>
             <p>{{recipe.method}}</p>
-        </div>
-    </div>
+        </article>
+    </section>
 </div>
 
 

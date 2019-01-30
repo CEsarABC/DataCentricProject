@@ -4,10 +4,11 @@
 
 <!--            HEADER                   -->
 <div class="container">
-  <div class="jumbotron">
+  <header class="jumbotron">
     <h1 class="display-4">Your Recipes!</h1>
     <span class='sub'>Did you forget somethig? ..Better recipe? ..just change it friend! </span>
-  </div>
+  </header>
+  <section>
     <form class='row' action="{{ url_for('check_author') }}" method="POST">
       <div class='col-lg-12 col-md-12 col-sm-12'>
         <div class='form-row'>
@@ -26,13 +27,15 @@
           code in the application should redirect to the same page after validation
           to show results -->
     </form>
+  </section>
+    
       
-    <div class='row mt-3'>
+    <header class='row mt-3'>
     {% if searchfile %}
       <h2>Welcome Back {{authorName}}!</h2>
     {% endif %}
-    </div>
-    <div class='row mt-3'>
+    </header>
+    <article class='row mt-3'>
     {% for item in searchfile %}
       <div class="card text-center mb-3 col-lg-3 col-md-4 col-sm-6 col-12" style="width: 9rem;">
         <img class="card-img-top image-fluid" src="{{item.images_small}}" alt="Card image cap">
@@ -45,7 +48,7 @@
         </div>
       </div>
         {% endfor %}
-    </div>
+    </article>
 </div>
 
 

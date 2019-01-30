@@ -1,184 +1,186 @@
-{% extends 'base.html' %} 
+{% extends 'base.html' %}
 
 {% block content %}
 
 
 <!--            HEADER                   -->
 <div class="container">
-    
-      <form class='row' action="{{url_for('update_recipe', recipe_id=recipe._id) }}" method="POST">
-          <div class='col-lg-10 col-md-9 col-sm-12'>
-            <div class='form-row'>
-              <div class="col">
-                  <input class="form-control" type="text"  name="author_name" id="author_name" value='{{recipe.author}}' required/>
-                  <label for="author_name">Author First Name</label>
-              </div>
-              <div class="col">
-                  <input class="form-control" type="text" name="author_dob" id="author_dob" value='{{recipe.dob}}' required/>
-                  <label for="author_dob">Author D.O.B</label>
-              </div>
-            </div>
-            <div class='form-row'>
-              <div class="col">
-                  <input class="form-control" type="text"  name="recipe_name" id="recipe_name" value='{{recipe.recipe_name}}' required/>
-                  <label for="recipe_name">Recipe Name</label>
-              </div>
-              <div class="col">
-                  <input class="form-control" type="text" name="recipe_description" id="recipe_description" value='{{recipe.description}}'/>
-                  <label for="recipe_description">Description</label>
-              </div>
-            </div>
-            <div class='form-row'>
-              <div class="col">
-                  <select class="form-control col-lg-4" name="cuisine_name" id="cuisine">
-                    <option value="{{recipe.cuisine}}"selected>{{recipe.cuisine}}</option>
-                    {% for item in cuisine %}
-                    <option value="{{item.cuisine}}">{{item.cuisine}}</option>
-                    {% endfor %}
-                  </select>
-                  <label>Cuisine Type</label>
-              </div>
-              <div class="col">
-                  <input class="form-control col-lg-4" type="number" name="serves" id="serves" value='{{recipe.serves}}'/>
-                  <label for="serves">Serves</label>
-              </div>
-              <div class="col">
-                  <input class="form-control col-lg-4" type="number"  name="cooking_time" id="cooking_time" value='{{recipe.time}}'/>
-                  <label for="cooking_time">Cooking Time in Minuntes</label>
-              </div>
-            </div>
-            <div class='form-row'>
-              <div class="col">
-                <label for="ingredients">Ingredients</label>
-                <textarea class="form-control" id="ingredients" name='ingredients' rows="3" value='{{recipe.ingredients}}'>{{recipe.ingredients}}</textarea>
-              </div>
-              <div class="col">
-                <label for="method">Method</label>
-                <textarea class="form-control" id="method" name='method' rows="3" value='{{recipe.method}}'>{{recipe.method}}</textarea>
-              </div>
-            </div>
-            
+  <header class="jumbotron jumbo_form">
+    <h1 class="display-4">Make It Better!</h1>
+    <span class='sub'>Don' forget to update the allergens too!</span>
+  </header>
+  <section>
+    <form class='row' action="{{url_for('update_recipe', recipe_id=recipe._id) }}" method="POST">
+      <div class='col-lg-10 col-md-9 col-sm-12'>
+        <div class='form-row'>
+          <div class="col">
+            <input class="form-control" type="text" name="author_name" id="author_name" value='{{recipe.author}}' required />
+            <label for="author_name">Author First Name</label>
           </div>
-          <div class='col-lg-2 col-md-3 col-sm-12 blackbox' >
-            <h3>Allergens</h3>
-            <div class="form-check">
-              {% if 'crustaceans' in recipe.allergens %}
-              <input class="form-check-input" type="checkbox" name="crustaceans1" value="crustaceans" id="crustaceans" checked="checked"/>
-              {% else %}
-              <input class="form-check-input" type="checkbox" name="crustaceans1" value="crustaceans" id="crustaceans"/>
-              {% endif %}
-              <label class="form-check-label" for="crustaceans">Crustaceans</label>
-            </div>
-            <div class="form-check">
-              {% if 'gluten' in recipe.allergens %}
-              <input class="form-check-input" type="checkbox" name="gluten1" value="gluten" id="gluten" checked="checked"/>
-              {% else %}
-              <input class="form-check-input" type="checkbox" name="gluten1" value="gluten" id="gluten"/>
-              {% endif %}
-              <label class="form-check-label" for="gluten">Gluten</label>
-            </div>
-            <div class="form-check">
-              {% if 'milk' in recipe.allergens %}
-              <input class="form-check-input" type="checkbox" name="milk1" value="milk" id="milk" checked="checked"/>
-              {% else %}
-              <input class="form-check-input" type="checkbox" name="milk1" value="milk" id="milk"/>
-              {% endif %}
-              <label class="form-check-label" for="milk">Milk</label>
-            </div>
-            <div class="form-check">
-              {% if 'eggs' in recipe.allergens %}
-              <input class="form-check-input" type="checkbox" name="eggs1" value="eggs" id="eggs" checked="checked"/>
-              {% else %}
-              <input class="form-check-input" type="checkbox" name="eggs1" value="eggs" id="eggs"/>
-              {% endif %}
-              <label class="form-check-label" for="eggs">Eggs</label>
-            </div>
-            <div class="form-check">
-              {% if 'fish' in recipe.allergens %}
-              <input class="form-check-input" type="checkbox" name="fish1" value="fish" id="fish" checked="checked"/>
-              {% else %}
-              <input class="form-check-input" type="checkbox" name="fish1" value="fish" id="fish"/>
-              {% endif %}
-              <label class="form-check-label" for="fish">Fish</label>
-            </div>
-            <div class="form-check">
-              {% if 'celery' in recipe.allergens %}
-              <input class="form-check-input" type="checkbox" name="celery1" value="celery" id="celery" checked="checked"/>
-              {% else %}
-              <input class="form-check-input" type="checkbox" name="celery1" value="celery" id="celery"/>
-              {% endif %}
-              <label class="form-check-label" for="celery">Celery</label>
-            </div>
-            <div class="form-check">
-              {% if 'mollucs' in recipe.allergens %}
-              <input class="form-check-input" type="checkbox" name="mollucs1" value="mollucs" id="mollucs" checked="checked"/>
-              {% else %}
-              <input class="form-check-input" type="checkbox" name="mollucs1" value="mollucs" id="mollucs"/>
-              {% endif %}
-              <label class="form-check-label" for="mollucs">Mollucs</label>
-            </div>
-            <div class="form-check">
-              {% if 'nuts' in recipe.allergens %}
-              <input class="form-check-input" type="checkbox" name="nuts1" value="nuts" id="nuts" checked="checked"/>
-              {% else %}
-              <input class="form-check-input" type="checkbox" name="nuts1" value="nuts" id="nuts"/>
-              {% endif %}
-              <label class="form-check-label" for="nuts">Nuts</label>
-            </div>
-            <div class="form-check">
-              {% if 'peanuts' in recipe.allergens %}
-              <input class="form-check-input" type="checkbox" name="peanuts1" value="peanuts" id="peanuts" checked="checked"/>
-              {% else %}
-              <input class="form-check-input" type="checkbox" name="peanuts1" value="peanuts" id="peanuts"/>
-              {% endif %}
-              <label class="form-check-label" for="peanuts">Peanuts</label>
-            </div>
-            <div class="form-check">
-              {% if 'mustard' in recipe.allergens %}
-              <input class="form-check-input" type="checkbox" name="mustard1" value="mustard" id="mustard" checked="checked"/>
-              {% else %}
-              <input class="form-check-input" type="checkbox" name="mustard1" value="mustard" id="mustard"/>
-              {% endif %}
-              <label class="form-check-label" for="mustard">Mustard</label>
-            </div>
-            <div class="form-check">
-              {% if 'sesame' in recipe.allergens %}
-              <input class="form-check-input" type="checkbox" name="sesame1" value="sesame" id="sesame" checked="checked"/>
-              {% else %}
-              <input class="form-check-input" type="checkbox" name="sesame1" value="sesame" id="sesame"/>
-              {% endif %}
-              <label class="form-check-label" for="sesame">Sesame Seeds</label>
-            </div>
-            <div class="form-check">
-              {% if 'sulphites' in recipe.allergens %}
-              <input class="form-check-input" type="checkbox" name="sulphites1" value="sulphites" id="sulphites" checked="checked"/>
-              {% else %}
-              <input class="form-check-input" type="checkbox" name="sulphites1" value="sulphites" id="sulphites" />
-              {% endif %}
-              <label class='form-check-label' for="sulphites">Sulphites</label>
-            </div>
-            <div class="form-check">
-              {% if 'soya' in recipe.allergens %}
-              <input class="form-check-input" type="checkbox" name="soya1" value="soya" id="soya" checked="checked"/>
-              {% else %}
-              <input class="form-check-input" type="checkbox" name="soya1" value="soya" id="soya"/>
-              {% endif %}
-              <label class='form-check-label' for="soya">Soya</label>
-            </div>
-            <div class="form-check">
-              {% if 'lupin' in recipe.allergens %}
-              <input class="form-check-input" type="checkbox" name="lupin1" value="lupin" id="lupin" checked="checked"/>
-              {% else %}
-              <input class="form-check-input" type="checkbox" name="lupin1" value="lupin" id="lupin"/>
-              {% endif %}
-              <label class='form-check-label' for="lupin">Lupin</label>
-            </div>
+          <div class="col">
+            <input class="form-control" type="text" name="author_dob" id="author_dob" value='{{recipe.dob}}' required />
+            <label for="author_dob">Author D.O.B</label>
           </div>
-        <div>
-          <button class="form-control btn btn-primary" type="submit">Add info</button>
         </div>
-      </form>
+        <div class='form-row'>
+          <div class="col">
+            <input class="form-control" type="text" name="recipe_name" id="recipe_name" value='{{recipe.recipe_name}}' required />
+            <label for="recipe_name">Recipe Name</label>
+          </div>
+          <div class="col">
+            <input class="form-control" type="text" name="recipe_description" id="recipe_description" value='{{recipe.description}}' />
+            <label for="recipe_description">Description</label>
+          </div>
+        </div>
+        <div class='form-row'>
+          <div class="col">
+            <select class="form-control col-lg-4" name="cuisine_name" id="cuisine">
+              <option value="{{recipe.cuisine}}" selected>{{recipe.cuisine}}</option>
+              {% for item in cuisine %}
+              <option value="{{item.cuisine}}">{{item.cuisine}}</option>
+              {% endfor %}
+            </select>
+            <label>Cuisine Type</label>
+          </div>
+          <div class="col">
+            <input class="form-control col-lg-4" type="number" name="serves" id="serves" value='{{recipe.serves}}' />
+            <label for="serves">Serves</label>
+          </div>
+          <div class="col">
+            <input class="form-control col-lg-4" type="number" name="cooking_time" id="cooking_time" value='{{recipe.time}}' />
+            <label for="cooking_time">Cooking Time in Minuntes</label>
+          </div>
+        </div>
+        <div class='form-row'>
+          <div class="col">
+            <label for="ingredients">Ingredients</label>
+            <textarea class="form-control" id="ingredients" name='ingredients' rows="5" value='{{recipe.ingredients}}'>{{recipe.ingredients}}</textarea>
+          </div>
+          <div class="col">
+            <label for="method">Method</label>
+            <textarea class="form-control" id="method" name='method' rows="5" value='{{recipe.method}}'>{{recipe.method}}</textarea>
+          </div>
+        </div>
+
+      </div>
+      <div class='col-lg-2 col-md-3 col-sm-12 blackbox'>
+        <h3>Allergens</h3>
+        <div class="form-check">
+          {% if 'crustaceans' in recipe.allergens %}
+          <input class="form-check-input" type="checkbox" name="crustaceans1" value="crustaceans" id="crustaceans" checked="checked" />
+          {% else %}
+          <input class="form-check-input" type="checkbox" name="crustaceans1" value="crustaceans" id="crustaceans" />
+          {% endif %}
+          <label class="form-check-label" for="crustaceans">Crustaceans</label>
+        </div>
+        <div class="form-check">
+          {% if 'gluten' in recipe.allergens %}
+          <input class="form-check-input" type="checkbox" name="gluten1" value="gluten" id="gluten" checked="checked" />
+          {% else %}
+          <input class="form-check-input" type="checkbox" name="gluten1" value="gluten" id="gluten" />
+          {% endif %}
+          <label class="form-check-label" for="gluten">Gluten</label>
+        </div>
+        <div class="form-check">
+          {% if 'milk' in recipe.allergens %}
+          <input class="form-check-input" type="checkbox" name="milk1" value="milk" id="milk" checked="checked" />
+          {% else %}
+          <input class="form-check-input" type="checkbox" name="milk1" value="milk" id="milk" />
+          {% endif %}
+          <label class="form-check-label" for="milk">Milk</label>
+        </div>
+        <div class="form-check">
+          {% if 'eggs' in recipe.allergens %}
+          <input class="form-check-input" type="checkbox" name="eggs1" value="eggs" id="eggs" checked="checked" />
+          {% else %}
+          <input class="form-check-input" type="checkbox" name="eggs1" value="eggs" id="eggs" />
+          {% endif %}
+          <label class="form-check-label" for="eggs">Eggs</label>
+        </div>
+        <div class="form-check">
+          {% if 'fish' in recipe.allergens %}
+          <input class="form-check-input" type="checkbox" name="fish1" value="fish" id="fish" checked="checked" />
+          {% else %}
+          <input class="form-check-input" type="checkbox" name="fish1" value="fish" id="fish" />
+          {% endif %}
+          <label class="form-check-label" for="fish">Fish</label>
+        </div>
+        <div class="form-check">
+          {% if 'celery' in recipe.allergens %}
+          <input class="form-check-input" type="checkbox" name="celery1" value="celery" id="celery" checked="checked" />
+          {% else %}
+          <input class="form-check-input" type="checkbox" name="celery1" value="celery" id="celery" />
+          {% endif %}
+          <label class="form-check-label" for="celery">Celery</label>
+        </div>
+        <div class="form-check">
+          {% if 'mollucs' in recipe.allergens %}
+          <input class="form-check-input" type="checkbox" name="mollucs1" value="mollucs" id="mollucs" checked="checked" />
+          {% else %}
+          <input class="form-check-input" type="checkbox" name="mollucs1" value="mollucs" id="mollucs" />
+          {% endif %}
+          <label class="form-check-label" for="mollucs">Mollucs</label>
+        </div>
+        <div class="form-check">
+          {% if 'nuts' in recipe.allergens %}
+          <input class="form-check-input" type="checkbox" name="nuts1" value="nuts" id="nuts" checked="checked" />
+          {% else %}
+          <input class="form-check-input" type="checkbox" name="nuts1" value="nuts" id="nuts" />
+          {% endif %}
+          <label class="form-check-label" for="nuts">Nuts</label>
+        </div>
+        <div class="form-check">
+          {% if 'peanuts' in recipe.allergens %}
+          <input class="form-check-input" type="checkbox" name="peanuts1" value="peanuts" id="peanuts" checked="checked" />
+          {% else %}
+          <input class="form-check-input" type="checkbox" name="peanuts1" value="peanuts" id="peanuts" />
+          {% endif %}
+          <label class="form-check-label" for="peanuts">Peanuts</label>
+        </div>
+        <div class="form-check">
+          {% if 'mustard' in recipe.allergens %}
+          <input class="form-check-input" type="checkbox" name="mustard1" value="mustard" id="mustard" checked="checked" />
+          {% else %}
+          <input class="form-check-input" type="checkbox" name="mustard1" value="mustard" id="mustard" />
+          {% endif %}
+          <label class="form-check-label" for="mustard">Mustard</label>
+        </div>
+        <div class="form-check">
+          {% if 'sesame' in recipe.allergens %}
+          <input class="form-check-input" type="checkbox" name="sesame1" value="sesame" id="sesame" checked="checked" />
+          {% else %}
+          <input class="form-check-input" type="checkbox" name="sesame1" value="sesame" id="sesame" />
+          {% endif %}
+          <label class="form-check-label" for="sesame">Sesame Seeds</label>
+        </div>
+        <div class="form-check">
+          {% if 'sulphites' in recipe.allergens %}
+          <input class="form-check-input" type="checkbox" name="sulphites1" value="sulphites" id="sulphites" checked="checked" />
+          {% else %}
+          <input class="form-check-input" type="checkbox" name="sulphites1" value="sulphites" id="sulphites" />
+          {% endif %}
+          <label class='form-check-label' for="sulphites">Sulphites</label>
+        </div>
+        <div class="form-check">
+          {% if 'soya' in recipe.allergens %}
+          <input class="form-check-input" type="checkbox" name="soya1" value="soya" id="soya" checked="checked" />
+          {% else %}
+          <input class="form-check-input" type="checkbox" name="soya1" value="soya" id="soya" />
+          {% endif %}
+          <label class='form-check-label' for="soya">Soya</label>
+        </div>
+        <div class="form-check">
+          {% if 'lupin' in recipe.allergens %}
+          <input class="form-check-input" type="checkbox" name="lupin1" value="lupin" id="lupin" checked="checked" />
+          {% else %}
+          <input class="form-check-input" type="checkbox" name="lupin1" value="lupin" id="lupin" />
+          {% endif %}
+          <label class='form-check-label' for="lupin">Lupin</label>
+        </div>
+      </div>
+      <button class="form-control btn btn-primary" type="submit">Ready!</button>
+    </form>
+  </section>
 </div>
 
 {% endblock %}
-

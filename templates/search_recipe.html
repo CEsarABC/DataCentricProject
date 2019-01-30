@@ -6,11 +6,11 @@
 
 <div class="container">
   
-    <div class="jumbotron jumbo_form">
+    <header class="jumbotron jumbo_form">
       <h1 class="display-4">Search Recipes</h1>
       <span class='sub'>Search by author or if you want to jump any recipes by allergen, maybe you just want
       one type of cuisine.</span>
-    </div>
+    </header>
     
     <!-- graphs -->
     <!--<div class='row blackbox mb-2'>-->
@@ -68,34 +68,30 @@
     <!--  search forms   -->
     
     
-    <div class="row blackbox">
-      <form class='col' action="{{ url_for('search_recipe_author') }}" method="POST">
-        <div class="col">
-          <input class="form-control" type="text"  name="author" id="author_name"/>
-          <label for="author_name">Author First Name</label>
-          <button class="form-control btn btn-primary" type="submit">Search</button>
-        </div>
+    <section class="row blackbox">
+      <form class="col-lg-4 mb-3" action="{{ url_for('search_recipe_author') }}" method="POST">
+        <label for="author_name">Author First Name</label>
+        <input class="form-control" type="text"  name="author" id="author_name"/>
+        <button class="form-control btn btn-primary" type="submit">Search</button>
       </form>
-      <form class='col' action="{{ url_for('search_recipe_allergen') }}" method="POST">
-        <div class='col'>
-            <input class="form-control" type="text"  name="allergen" id="allergen"/>
-            <label for="allergens">Filter your allergen</label>
-            <button class="form-control btn btn-primary" type="submit">Search</button>
-        </div>
+      <form class='col-lg-4 mb-3' action="{{ url_for('search_recipe_allergen') }}" method="POST">
+        <label for="allergens">Filter your allergen</label>
+        <input class="form-control" type="text"  name="allergen" id="allergen"/>
+        <button class="form-control btn btn-primary" type="submit">Search</button>
       </form>
-        <form class='col' action="{{ url_for('search_recipe_cuisine') }}" method="POST">
-          <select class="col form-control" name="cuisine" id="cuisine">
-            <option value="" disabled selected>Cuisine</option>
-            {% for item in cuisine %}
-            <option value="{{item.cuisine}}">{{item.cuisine}}</option>
-            {% endfor %}
-          </select>
-          <label>Cuisine Type</label>
-          <button class="form-control btn btn-primary" type="submit">Search</button>
+      <form class="col-lg-4 mb-3" action="{{ url_for('search_recipe_cuisine') }}" method="POST">
+        <label>Cuisine Type</label>
+        <select class="form-control" name="cuisine" id="cuisine">
+          <option value="" disabled selected>Cuisine</option>
+          {% for item in cuisine %}
+          <option value="{{item.cuisine}}">{{item.cuisine}}</option>
+          {% endfor %}
+        </select>
+        <button class="form-control btn btn-primary" type="submit">Search</button>
       </form>
-    </div>
+    </section>
     
-  <div class='row mt-3'>
+  <article class='row mt-3'>
   {% if searchAuthor%}
   {% for item in searchAuthor %}
     <div class="card text-center mb-3 col-lg-3 col-md-4 col-sm-6 col-12" style="width: 9rem;">
@@ -108,9 +104,9 @@
     </div>
     {% endfor %}
     {% endif %}
-  </div>
+  </article>
   
-  <div class='row'>
+  <article class='row'>
   {% if searchAllergen%}
   {% for item in searchAllergen %}
     <div class="card text-center mb-3 col-lg-3 col-md-4 col-sm-6 col-12" style="width: 9rem;">
@@ -123,10 +119,10 @@
     </div>
     {% endfor %}
     {% endif %}
-  </div>
+  </article>
     
     
-  <div class='row'>
+  <article class='row'>
   {% if searchCuisine%}
   {% for item in searchCuisine %}
     <div class="card text-center mb-3 col-lg-3 col-md-4 col-sm-6 col-12" style="width: 9rem;">
@@ -139,7 +135,7 @@
     </div>
      {% endfor %}
     {% endif %}
-  </div>
+  </article>
 </div>
 
 {% endblock %}

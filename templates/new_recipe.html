@@ -5,11 +5,11 @@
 
 <!--            HEADER                   -->
 <div class="container">
-    <div class="jumbotron jumbo_form" >
+    <header class="jumbotron jumbo_form" >
       <h1 class="display-4">Start your own book and share with us!</h1>
       <span class='sub'>Your first name and DOB will help you edit your recipes in the future!</span>
-    </div>
-    
+    </header>
+    <section>
       <form class='row' action="{{ url_for('insert_recipe') }}" method="POST">
           <!-- changing url for depending of application {{ url_for('insert_recipe') }}-->
         <div class='col-lg-10 col-md-9 col-sm-12'>
@@ -126,6 +126,8 @@
           <button class="form-control btn btn-primary" type="submit" onclick="alertScreen()">Add Recipe</button>
         </div>
       </form>
+    </section>
+      
       <script>
         function alertScreen() {
             alert('Your Recipe has beed added!')

@@ -3,12 +3,12 @@
 {% block content %}
 
 <div class="container">
-    <div class="jumbotron">
+    <header class="jumbotron">
         <h1 class="display-4">All Our Recipes <br>In One Place!</h1>
         <span class='sub'>Take a look, get inspired, 
        <br>try something new everyday.</span>
-    </div>
-    <div class='row mt-3'>
+    </header>
+    <section class='row mt-3'>
     {% if allrecipes%}
       {% for item in allrecipes %}
         <div class="card text-center mb-3 col-lg-3 col-md-4 col-sm-6 col-12" style="width: 9rem;">
@@ -21,7 +21,7 @@
         </div>
       {% endfor %}
     {% endif %}
-    </div>
+    </section>
 </div>
 
 
