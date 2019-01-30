@@ -3,8 +3,14 @@
 The project is focused in the use of data bases as the use of python and flask to put all together.
 
 My cooking book concept, is a space where users can check, create or edit their own recipes, with a simple, yet balanced
-desing, the user experience is clean and the navigation through pages creates a space where you can come and go as you please,
+design, the user experience is clean and the navigation through pages creates a space where you can come and go as you please,
 never limitating the user.
+
+This project generated various challenges when using the different syntax for the Mongo terminal and pymongo. the 
+conceptualization of the project was simple but creating the logic in python based in mongo and applied to flask was
+the biggest challenge, trying to create a web site which responds to the user in the most basic manner and keep 
+the standards for an aceptable web site took time but was rewarding.
+
 
 This project delivers by using the mongo data base, which is flexible and intuitive. 
 
@@ -15,9 +21,8 @@ This project delivers by using the mongo data base, which is flexible and intuit
   - [x] User can create, edit and delete recipes created by him
   - [x] User has a simple verification method to access his/her own recipes
   - [x] The page flow is intuitive and lets the user navigate to any place at any moment
-  - [x] The web development has sections which allow for the distrubution of information
-  - [x] A graph shows users the amount of authors and recipes in the site
-  - [x] 
+  - [x] The web development has sections which allow for the distribution of information
+  - [x] A graph updates and shows users the amount of authors and recipes in the site
 
 ## Project guidelines
   - [x] Logic written in python. other technologies used
@@ -30,7 +35,7 @@ This project delivers by using the mongo data base, which is flexible and intuit
   - [x] User stories, wireframes
   - [x] CSS and Bootstrap frameworks used
   - [x] README.md file made
-  - [x] GitHub version control used during development
+  - [x] GitHub version control used during development https://github.com/CEsarABC/DataCentricProject
   - [x] Final version of the code deployed in Heroku
 
 
@@ -104,19 +109,19 @@ the Database structure:
   - collection of cuisines
   
 The schema used for the main document:
-- 'author': name                    (used for verification)   
-- 'dob': dob                        (used for verification)
-- 'recipe_name': nrecipe            (new document)
-- 'description': description        (information)
-- 'cuisine': cuisine                (information)
-- 'serves': serves                  (information)
-- 'time': ctime                     (information)
-- 'ingredients': ingredients        (information)
-- 'method': method                  (information)
-- 'views': 0                        (views count and record)
-- "images_small": "/dishes0.jpg"    (image link for card)
-- "images_large": "/dishesL0.jpg"   (image link for recipe page)
-- 'allergens': arrayValues          (array created with the selected allergens)
+- `'author': name   `                 (used for verification)   
+- `'dob': dob    `                    (used for verification)
+- `'recipe_name': nrecipe  `          (new document)
+- `'description': description `       (information)
+- `'cuisine': cuisine `               (information)
+- `'serves': serves `                (information)
+- `'time': ctime   `                  (information)
+- `'ingredients': ingredients `       (information)
+- `'method': method `                 (information)
+- `'views': 0`                        (views count and record)
+- `"images_small": "/dishes0.jpg"`    (image link for card)
+- `"images_large": "/dishesL0.jpg"`   (image link for recipe page)
+- `'allergens': arrayValues  `        (array created with the selected allergens)
 
 
 
@@ -142,10 +147,13 @@ individually and the assembled into the full application
 - Project fully deployed to Heroku  https://cooking-book-cb.herokuapp.com/
   - The project was deployed following the guidelines from the code Institute materials
   - New project was created in Heroku
-  - requirements.txt was created
+  - requirements.txt was created by the use of `pip3 freeze`
   - Procfile was created
   - Heroku remote was set in order to push application
-  - Configuration variables were changed as indicated to have 'IP' = (0.0.0.0) and 'PORT' = (5000)
+  - Configuration variables were changed as indicated to have `'IP' = (0.0.0.0) and 'PORT' = (5000)`
+  - To access the recipes for edition you can use and test your own recipes or just use:
+    - ==author: Cesar DOB: 24/02/87==
+    - ==author: Oscar DOB: 24/02/88==
 
 
 - pip3 used to install pymongo
