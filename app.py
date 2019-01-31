@@ -175,8 +175,8 @@ def check_author():
     items = nesting.items()
     author = nesting.get('author')
     dob = nesting.get('dob')
-    # session['author'] = request.form['author']
-    # session['dob']= request.form['dob']
+    session['author'] = nesting.get('author')
+    session['dob']= nesting.get('author')
     searchfile = nestingCollection.find({'author':author.capitalize(), 'dob':dob})
     return render_template('my_recipes.html', searchfile = searchfile, authorName=author.capitalize(),author=author,dob=dob)
     
@@ -254,7 +254,7 @@ def update_recipe(recipe_id):
         ingredients = request.form.get('ingredients')
         method = request.form.get('method')
         
-    recipe.update( {'_id': ObjectId(recipe_id)},
+    recipe.update( {'_id': ObjectId(recipe_id)},{'$set':
     {
         'author': name,
         'dob': dob,
@@ -266,16 +266,16 @@ def update_recipe(recipe_id):
         'ingredients': ingredients,
         'method': method,
         'allergens': arrayValues
-    })
-    return redirect(url_for('my_recipes_session'))
+    }})
+    return redirect(url_for('my_recipes'))
     
-    
+
 ''' takes the id from the recipe page and deletes the item '''
 
 @app.route('/delete_recipe/<item_id>')
 def delete_recipe(item_id):
     mongo.db.nesting.remove({'_id': ObjectId(item_id)})
-    return redirect(url_for('my_recipes_session'))
+    return redirect(url_for('my_recipes'))
     
 
     
