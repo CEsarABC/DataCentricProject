@@ -42,7 +42,7 @@
         <div class="card-body">
           <h5 class="card-title">{{item.recipe_name}}</h5>
           <p class="card-text">{{item.description}}</p>
-          <a href="{{url_for('edit_recipe', item_id=item._id)}}" class="btn btn-primary">Edit</a>
+          <a href="{{url_for('edit_recipe', item_id=item._id, author=author, dob=dob)}}" class="btn btn-primary">Edit</a>
           <a href="{{url_for('delete_recipe', item_id=item._id, author=author, dob=dob)}}" class="btn btn-primary">Delete</a>
           <a href="{{ url_for('show_recipe', item_id=item._id) }}" class="btn btn-primary">View</a>
         </div>

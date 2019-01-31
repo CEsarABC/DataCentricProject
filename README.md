@@ -1,6 +1,6 @@
 # Data Centric Development Milestone Project
 
-The project is focused on the use of data bases and the use of python and flask to put it all together.
+The project is focused on the use of databases and the use of python and flask to put it all together.
 
 My cooking book concept is a space where users can check, create or edit their own recipes, with a simple, yet balanced
 design. The user experience is clean and the navigation through pages creates a space where you can come and go as you please,
@@ -11,12 +11,12 @@ conceptualization of the project was simple but creating the logic in python bas
 the biggest challenge. Trying to create a web site which responds to the user in the most basic manner and keep 
 the standards for an acceptable web site took time but was rewarding.
 
-This project delivers by using the mongo data base, which is flexible and intuitive. 
+This project delivers by using the mongo database, which is flexible and intuitive. 
 
 ** All information and pictures are fictional, non related and just for testing **
 
 ## Application guidelines
-  - [x] MongoDB to hold a data base based on cooking recipes
+  - [x] MongoDB to hold a database based on cooking recipes
   - [x] User is presented to a web page inviting to see create or edit recipes
   - [x] User can create, edit and delete recipes created by him/her
   - [x] User has a simple verification method to access his/her own recipes
@@ -79,7 +79,7 @@ This project delivers by using the mongo data base, which is flexible and intuit
 
 ## Features
 - User can navegate in any section of the site 
-- User can see all recipes in the data base
+- User can see all recipes in the database
 - User can search by author name, cuisine or search by filtering an allergen
 - User is able to add recipes, important fields are required in the form
 - User validation for editing or deleting recipes
@@ -131,8 +131,8 @@ The schema used for the main document:
 - Mostly manual testing, all modules in the python application where developed
 individually and the assembled into the full application
 - Modules tested:
-- [x] reading from data base
-- [x] queries from data base
+- [x] reading from database
+- [x] queries from database
 - [x] use of flask to bring data to html documents
 - [x] inserting and modifing from database
 - [x] use of python to extract data from database
@@ -181,7 +181,7 @@ individually and the assembled into the full application
   - MongoDB - The Complete Developer's Guide
   - Python and Flask bootcamp
 - https://docs.mongodb.com/
-- Samll blocks of code taken from boostrap 4.0 web page 
+- Small blocks of code taken from boostrap 4.0 web page 
 - Recipe texts taken from https://www.jamieoliver.com
 - Recipe texts taken from https://realfood.tesco.com/recipes/
 

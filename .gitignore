@@ -6,3 +6,4 @@ testCommands.py
 testget_Recipe.py
 jsonTest.py
 apptest.py
+templates/my_recipes_session.html
