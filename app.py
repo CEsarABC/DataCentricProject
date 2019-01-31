@@ -32,7 +32,7 @@ def contact():
 @app.route('/Recipes')
 def all_recipes():
     recipes =  mongo.db.nesting
-    allrecipes = recipes.find()
+    allrecipes = recipes.find().sort("_id", -1)
     return render_template('all_recipes.html', allrecipes=allrecipes)
     
     
