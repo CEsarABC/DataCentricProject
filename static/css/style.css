@@ -147,7 +147,6 @@ h1{
  .card{
      width: 9rem;
  }
- 
 }
 
 /* Portrait phones and smaller */
@@ -165,6 +164,5 @@ h1{
  .card{
      width: 9rem;
  }
- 
 }
 /* css specific properties col-xs-* or none for default*/

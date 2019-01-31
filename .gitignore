@@ -1,8 +1,9 @@
-/apptest.py
-/edit_doc.py
-/jsonTest.py
-/oldcode.py
-/test.json
-/test.py
-/testCommands.py
-/testget_Recipe.py
+oldcode.py
+edit_doc.py
+test.json
+test.py
+testCommands.py
+testget_recipe.py
+jsonTest.py
+apptest.py
+static/js/file.js
